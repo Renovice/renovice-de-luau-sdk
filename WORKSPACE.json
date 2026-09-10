@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "name": "renovice-de-luau-sdk-standalone",
+  "repos": {
+    "de_luau_toolchain": ".",
+    "native_analysis": "knowledge/native-analysis"
+  },
+  "protected": {
+    "research": "knowledge/research"
+  },
+  "shared": {
+    "semantic_sdk": "knowledge/semantic-sdk",
+    "de_luau_corpus": "corpus"
+  }
+}

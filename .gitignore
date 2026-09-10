@@ -1,0 +1,48 @@
+# Local work and generated reports
+work/
+stage/
+out/
+*.tmp
+*.new.exe
+
+# .NET and editor build products
+semantic-sdk/Build/
+semantic-sdk/src/**/bin/
+semantic-sdk/src/**/obj/
+tools/**/bin/
+tools/**/obj/
+.vs/
+.idea/
+
+# Python caches
+**/__pycache__/
+*.py[cod]
+
+# Certification scratch output. Curated proof records live in docs/certificates.
+cert/closure-map-smoke.tsv
+cert/*.log
+cert/*.json
+# Assembly-time duplicate nesting; canonical fixtures are one level above.
+cert/dis/dis/
+cert/fixtures/fixtures/
+cert/harvest/harvest/
+cert/ops/ops/
+cert/rt/rt/
+cert/v9/v9/
+cert/v10/v10/
+cert/v11/v11/
+cert/v12/v12/
+cert/v13/v13/
+cert/v14/v14/
+cert/v15/v15/
+cert/v16/v16/
+cert/vr/vr/
+cert/warframe_api/warframe_api/
+
+# User-provided game corpora must remain external.
+corpus/
+game-scripts/
+
+# OS noise
+Thumbs.db
+Desktop.ini

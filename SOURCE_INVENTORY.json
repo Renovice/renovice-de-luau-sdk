@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "assembled_utc": "2026-09-10T09:11:15Z",
+  "repository": "renovice-de-luau-sdk",
+  "purpose": "Standalone DE Luau decompiler, recompiler, certification harness, and optional evidence-backed readable/API layer",
+  "source_roles": {
+    "de_luau_toolchain": "src, data, api, cert, tests, and tools",
+    "semantic_sdk": "semantic-sdk source and registry",
+    "api_census": "knowledge/research/.../result_consumption_sites.tsv",
+    "native_registry": "knowledge/native-analysis/registry/registry.json"
+  },
+  "excluded": [
+    "Extracted 5,386-file game-script corpus",
+    "Bootstrapper/runtime repository",
+    "OpenWF server repository",
+    "Ability Studio application repository",
+    "Game installation and injected scripts",
+    "Regenerable multi-gigabyte research output",
+    "Historical baseline/snapshot bundles not needed by current gates",
+    "Generated .NET bin/obj/Build and local work output"
+  ],
+  "build_environment": {
+    "cxx": "MSYS2 UCRT64 g++ 15.2.0",
+    "dotnet_target": "net9.0",
+    "luau_version_identity": "SHA-256 because the bundled frontend has no --version command"
+  },
+  "fresh_verification": {
+    "native_selftests": {
+      "closure_index": "7/7",
+      "semantic_ir": "140/140",
+      "semantic_lowering": "22/22",
+      "readable_naming": "13/13"
+    },
+    "api_catalog": {
+      "census_rows": 55709,
+      "core": 225,
+      "high_confidence": 175,
+      "deep_contracts": 30
+    },
+    "semantic_sdk": {
+      "selftests": "8/8",
+      "symbols": 242,
+      "deep_contracts": 47,
+      "catalog_symbols": 225,
+      "corpus_sites": 37615,
+      "evidence": 24,
+      "negative_findings": 16
+    },
+    "ability_behavior_selftest": "6/6",
+    "external_corpus": {
+      "corpus_file_count": 5386,
+      "fixed_point": "360/360",
+      "fixed_point_failures": 0,
+      "process_errors": 0,
+      "ten_cycle_witnesses": "5/5",
+      "original_stock_byte_identity": "0/360",
+      "release_gates": "PASS 300/150",
+      "live_gameplay": "not run by this repository assembly"
+    },
+    "wrapper_smoke": "decompile, recompile, readable render, and strict API option forwarding PASS"
+  },
+  "pinned_artifacts": [
+    {
+      "path": "api/warframe/contracts.tsv",
+      "bytes": 16777,
+      "sha256": "7B83A6EFC582C27BB92D7ADD48B16E528A5CAB255EBC8A57CFB211EEF0D68D51"
+    },
+    {
+      "path": "api/warframe/evidence.tsv",
+      "bytes": 10138,
+      "sha256": "230BFF23F1188054BB9655BC109D9558E969A79F24ECB70705E5466F74B02F4A"
+    },
+    {
+      "path": "api/warframe/negative_contracts.tsv",
+      "bytes": 2510,
+      "sha256": "001054608AC1B2838E057DA5008FC92378E8CDAEAFA33F67A3CD71985CB849BD"
+    },
+    {
+      "path": "api/warframe/selected_catalog.tsv",
+      "bytes": 49622,
+      "sha256": "1A3CCF00EA6C147C85B0F73D51C9E06F7AD5DC421C1AF16329A06225AEBC55AF"
+    },
+    {
+      "path": "api/warframe/selection_seeds.tsv",
+      "bytes": 31538,
+      "sha256": "DCD72493172EE8D1F4D58B6BEB6DE8837DCD2B27A9CCFDA2613DB5F6776305CB"
+    },
+    {
+      "path": "bin/derecomp.exe",
+      "bytes": 7067929,
+      "sha256": "60157E2FD66E884E089AA7762AA7C5CD79C67748A502B7885FF6FEAE5AB46D6C"
+    },
+    {
+      "path": "bin/luau-compile.exe",
+      "bytes": 2935383,
+      "sha256": "6156A05D9CAF9FA84E58BAECA79A244F47D86B8982F5425F2CA3E23B976ED2A4"
+    },
+    {
+      "path": "bin/luau.exe",
+      "bytes": 1607680,
+      "sha256": "A0F4EDD1E80EF7D7AFD223C061E1F3B753398152CB732ABF57328A93B375053E"
+    },
+    {
+      "path": "bin/namecrack.exe",
+      "bytes": 2934684,
+      "sha256": "C60C92CCFAC33B9BC18EC7C4DDEFFDE17C07103E800F7D97CC39D735B4E97275"
+    },
+    {
+      "path": "bin/wf_api_catalog.exe",
+      "bytes": 2995373,
+      "sha256": "200DCBC9895CEEF84A1D20397F81FB779023C7A4E5AF3D0BCB0964DD38AC0092"
+    },
+    {
+      "path": "bin/wf_api_check.exe",
+      "bytes": 3142972,
+      "sha256": "DA989775F1E8E676A9F43CF23C17E39C4CD0CD16C517414CB8BEDC45FDB2B055"
+    },
+    {
+      "path": "data/name_map.json",
+      "bytes": 973979,
+      "sha256": "7F2A78F407201465B7FC069720FCA74C58C91F6BDEC995FA64798BF856CCFF3B"
+    },
+    {
+      "path": "data/namebase_merged.tsv",
+      "bytes": 22614188,
+      "sha256": "73F35EB41145CAE91875D83949AC457AC4A4F132DB2F7CDBC82E310D3D0CED0E"
+    },
+    {
+      "path": "data/namebase_verified.tsv",
+      "bytes": 22614188,
+      "sha256": "73F35EB41145CAE91875D83949AC457AC4A4F132DB2F7CDBC82E310D3D0CED0E"
+    },
+    {
+      "path": "docs/certificates/standalone-2026-09-10/idempotence.json",
+      "bytes": 2196694,
+      "sha256": "64C73B1A185F9F9A84921313CE4E7D42E0AA1D1D0E946F60FC81E3FBC1F17C6F"
+    },
+    {
+      "path": "docs/certificates/standalone-2026-09-10/release-gates.json",
+      "bytes": 4963,
+      "sha256": "A98B8968B2D476BCEAD286CF2D17B685D924FE6600A050A8C41893A1E15484EF"
+    },
+    {
+      "path": "docs/certificates/standalone-2026-09-10/run.json",
+      "bytes": 549,
+      "sha256": "DDA765A566317273E79BDBAE75F965D7B7B26302F38C4505919F90228B11A9D1"
+    },
+    {
+      "path": "knowledge/native-analysis/registry/registry.json",
+      "bytes": 12558,
+      "sha256": "F7BA3B2782643DBE0A3631761D7E19B373CB0E416C3FB7F33C5C5834E065F522"
+    },
+    {
+      "path": "knowledge/research/DE LUAU TRANSLATOR/NATIVE API AND LIVE CANDIDATE CENSUS/result_consumption_sites.tsv",
+      "bytes": 5733604,
+      "sha256": "F7CE896C2F32A0E4B6A7F3C7F254DCFC6B46FE8544E627D489D7C1C889D6AF14"
+    },
+    {
+      "path": "knowledge/semantic-sdk/manifest.json",
+      "bytes": 1911,
+      "sha256": "A4DA74D660E07EE0F06CAB998977B1CCD5A1DBD0C1F4CFD3CF31F75E162326DF"
+    },
+    {
+      "path": "knowledge/semantic-sdk/semantic-sdk.json",
+      "bytes": 301302,
+      "sha256": "91E5707177683ADA90CF264C72CAA0FF16BB342ED17ABE735B3E5C6A1DFC83D3"
+    },
+    {
+      "path": "knowledge/semantic-sdk/symbols.tsv",
+      "bytes": 50925,
+      "sha256": "B0F89189BA5AC4CEBE5A189BB300C292DF53B8652F56DE8973723F4F8E25D87E"
+    },
+    {
+      "path": "semantic-sdk/registry/native_links.tsv",
+      "bytes": 74,
+      "sha256": "9EDFFF59F362F682750C7C00AE133692C342F3BA6ADC435FF70D6289D31605E3"
+    },
+    {
+      "path": "third-party/luau/LICENSE.txt",
+      "bytes": 1124,
+      "sha256": "1597B423CA8F9C76225B498071F03B2B3609C4960B8DC30E63B230490FC82EFD"
+    }
+  ]
+}

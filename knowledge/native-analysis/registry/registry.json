@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-08-27T00:00:00Z",
+  "currentBuildId": "wf-2026.08.19.11.06-cca46d60",
+  "builds": [
+    {
+      "id": "wf-2026.08.19.11.06-cca46d60",
+      "productVersion": "2026.08.19.11.06",
+      "sha256": "CCA46D604A498CD95F0D28E3E8F3EEE8833F5D362666A8E5C820C535F7C2AF93",
+      "length": 45606520,
+      "architecture": "x86-64 PE",
+      "executablePathHint": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Warframe\\Warframe.x64.exe",
+      "status": "REGISTERED_EXACT_BUILD"
+    }
+  ],
+  "functions": [
+    {
+      "id": "wf.script-loader.semantic-boundary",
+      "name": "Warframe script-loader semantic boundary",
+      "subsystem": "Luau VM / loader",
+      "buildId": "wf-2026.08.19.11.06-cca46d60",
+      "status": "RUNTIME_READ_PROVEN",
+      "confidence": "HIGH",
+      "rva": null,
+      "signature": "resolved by existing exact-build bootstrapper signature registry; import pending",
+      "summary": "Captures the exact TopMenu body, root prototype, environment, global VM, and body key at the natural module load.",
+      "arguments": "Native signature not yet imported into this registry.",
+      "returnContract": "Loader completion; root/export timing is not inferred from return alone.",
+      "sideEffects": "Loads/executes a DE script module and supplies independently captured identity evidence.",
+      "evidenceIds": ["EV-TOPMENU-LIVE-CAPTURE", "EV-SCRIPTS-MENU-REPORT"],
+      "unresolved": ["Friendly native symbol", "RVA", "full argument signature", "ownership/lifetime of every native parameter"]
+    },
+    {
+      "id": "wf.luau-vm-interpreter-entry",
+      "name": "Luau VM interpreter entry",
+      "subsystem": "Luau VM",
+      "buildId": "wf-2026.08.19.11.06-cca46d60",
+      "status": "STATIC_CANDIDATE",
+      "confidence": "MEDIUM",
+      "rva": null,
+      "signature": "existing bootstrapper scan passes for this exact executable; authoritative signature import pending",
+      "summary": "Current-client disassembly reaches an interpreter boundary, but private state/frame layouts are not accepted as ownership evidence.",
+      "arguments": "At least a Luau state pointer is observed; complete ABI unresolved.",
+      "returnContract": "Normal interpreter return used only as a VM-local safe point in the staged design.",
+      "sideEffects": "Executes Luau bytecode.",
+      "evidenceIds": ["EV-SCRIPTS-MENU-REPORT", "EV-CALLINFO-IMPOSSIBLE"],
+      "unresolved": ["RVA", "stable semantic signature", "complete ABI", "Luau state layout", "call-frame layout"]
+    }
+  ],
+  "types": [
+    {
+      "id": "wf.luau-TValue-u43",
+      "name": "luau_TValue",
+      "subsystem": "Luau VM",
+      "buildId": "wf-2026.08.19.11.06-cca46d60",
+      "status": "STATIC_CONTRACT",
+      "confidence": "MEDIUM",
+      "size": 16,
+      "summary": "Bootstrapper declaration is statically asserted at 0x10 and used by currently working native adapters; this alone is not a complete native type proof.",
+      "fields": [
+        {"name":"value","offset":0,"size":8,"type":"union/opaque payload","status":"STATIC_CONTRACT"},
+        {"name":"type","offset":12,"size":4,"type":"Luau tag","status":"STATIC_CONTRACT"}
+      ],
+      "evidenceIds": ["EV-BOOTSTRAPPER-LUAU-HEADER"],
+      "unresolved": ["native number representation for every code path", "all private tag semantics", "GC ownership"]
+    },
+    {
+      "id": "wf.luau-CallInfo-partial-24",
+      "name": "luau_CallInfo partial 24-byte hypothesis",
+      "subsystem": "Luau VM",
+      "buildId": "wf-2026.08.19.11.06-cca46d60",
+      "status": "REJECTED",
+      "confidence": "HIGH",
+      "size": 24,
+      "summary": "The earlier partial declaration used the wrong record stride and invalidated ci-1 caller ownership.",
+      "fields": [],
+      "evidenceIds": ["EV-CALLINFO-PARTIAL-REJECTED"],
+      "unresolved": []
+    },
+    {
+      "id": "wf.luau-State-CallInfo-framewalk-u43",
+      "name": "luau_State + 48-byte CallInfo frame-walk contract",
+      "subsystem": "Luau VM",
+      "buildId": "wf-2026.08.19.11.06-cca46d60",
+      "status": "REJECTED_FOR_OWNERSHIP",
+      "confidence": "HIGH",
+      "size": 48,
+      "summary": "Although the 48-byte CallInfo size is statically asserted, the live state/base_ci arithmetic produced impossible frame counts. The combined layout may not be used for root ownership.",
+      "fields": [
+        {"name":"base","offset":0,"size":8,"type":"TValue*","status":"HYPOTHESIS"},
+        {"name":"func","offset":8,"size":8,"type":"TValue*","status":"HYPOTHESIS"},
+        {"name":"top","offset":16,"size":8,"type":"TValue*","status":"HYPOTHESIS"}
+      ],
+      "evidenceIds": ["EV-CALLINFO-IMPOSSIBLE", "EV-BOOTSTRAPPER-LUAU-HEADER"],
+      "unresolved": ["whether CallInfo fields or luau_State base_ci/ci offsets caused the contradiction", "correct current-client layouts"]
+    },
+    {
+      "id": "wf.topmenu-closure-contract-u43",
+      "name": "TopMenu Initialize/Builder closure contract",
+      "subsystem": "Luau UI",
+      "buildId": "wf-2026.08.19.11.06-cca46d60",
+      "status": "STATIC_CONTRACT",
+      "confidence": "HIGH",
+      "size": null,
+      "summary": "Exact captured bytecode proves Initialize has 23 captures, Initialize.U17 owns the 59-capture builder, and Builder.U58 receives the completed menu table.",
+      "fields": [
+        {"name":"Initialize.captureCount","offset":null,"size":null,"type":"23","status":"STATIC_CONTRACT"},
+        {"name":"Initialize.builder","offset":17,"size":null,"type":"Lua closure upvalue","status":"STATIC_CONTRACT"},
+        {"name":"Builder.captureCount","offset":null,"size":null,"type":"59","status":"STATIC_CONTRACT"},
+        {"name":"Builder.dispatch","offset":58,"size":null,"type":"Lua callback upvalue","status":"STATIC_CONTRACT"}
+      ],
+      "evidenceIds": ["EV-TOPMENU-LIVE-CAPTURE", "EV-SCRIPTS-MENU-REPORT"],
+      "unresolved": ["live acceptance of the staged U17/U58 wrapper"]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "EV-TOPMENU-LIVE-CAPTURE",
+      "kind": "LIVE_CAPTURE_AND_STATIC_DISASSEMBLY",
+      "confidence": "HIGH",
+      "summary": "Exact live TopMenu body: 159,749 bytes, body key 80e5e895b6c082c5, 384 prototypes, 12,912 instructions, SHA-256 D3279EE9A715B90BD078D9F614ACC691FD050E957212723541E5C92DD6639D94.",
+      "sourcePath": "repos/runtime/bootstrapper-runtime/RENOVICE_DEPLOYMENTS/NATIVE_SCRIPTS_MENU_2026-08-27/evidence/TopMenu.current.lua_B",
+      "expectedSha256": "D3279EE9A715B90BD078D9F614ACC691FD050E957212723541E5C92DD6639D94",
+      "expectedLength": 159749,
+      "buildIds": ["wf-2026.08.19.11.06-cca46d60"]
+    },
+    {
+      "id": "EV-SCRIPTS-MENU-REPORT",
+      "kind": "RESEARCH_REPORT",
+      "confidence": "HIGH",
+      "summary": "Positive and negative pause-menu evidence, including rejected export timing, protected-call, set-global, frame-walk, and old closure-count hypotheses.",
+      "sourcePath": "repos/runtime/bootstrapper-runtime/RENOVICE_SCRIPTING/SCRIPTS_PAUSE_MENU.md",
+      "buildIds": ["wf-2026.08.19.11.06-cca46d60"]
+    },
+    {
+      "id": "EV-CALLINFO-PARTIAL-REJECTED",
+      "kind": "LIVE_NEGATIVE_EVIDENCE",
+      "confidence": "HIGH",
+      "summary": "The 24-byte partial CallInfo declaration was incompatible with the observed 48-byte record and made ci-1 ownership invalid.",
+      "sourcePath": "repos/runtime/bootstrapper-runtime/RENOVICE_MIGRATION/MIGRATION_STATUS.md",
+      "buildIds": ["wf-2026.08.19.11.06-cca46d60"]
+    },
+    {
+      "id": "EV-CALLINFO-IMPOSSIBLE",
+      "kind": "LIVE_NEGATIVE_EVIDENCE",
+      "confidence": "HIGH",
+      "summary": "The later VM diagnostic produced impossible frame counts including 6148914691236517207. The private frame/state layout is rejected as ownership evidence.",
+      "sourcePath": "repos/runtime/bootstrapper-runtime/RENOVICE_SCRIPTING/SCRIPTS_PAUSE_MENU.md",
+      "buildIds": ["wf-2026.08.19.11.06-cca46d60"]
+    },
+    {
+      "id": "EV-BOOTSTRAPPER-LUAU-HEADER",
+      "kind": "SOURCE_DECLARATION",
+      "confidence": "MEDIUM",
+      "summary": "Current bootstrapper Luau declarations and static assertions. These are implementation inputs, not independent native proof.",
+      "sourcePath": "repos/runtime/bootstrapper-runtime/owf_luau.hpp",
+      "buildIds": ["wf-2026.08.19.11.06-cca46d60"]
+    },
+    {
+      "id": "EV-GHIDRA-FUNCTION-INDEX",
+      "kind": "EXACT_BUILD_STATIC_ANALYSIS_INDEX",
+      "confidence": "MEDIUM",
+      "summary": "Pinned Ghidra 12.1.3 completed 793 seconds of exact-build analysis and exported 94,157 function candidates. The run-specific validator confirmed analysis/save/import completion with 0 errors and 0 OOMs; 213 warnings and 69 debug recoveries remain preserved as limitations.",
+      "sourcePath": "work/native-analysis/exports/wf-2026.08.19.11.06-cca46d60/function-index.json",
+      "expectedSha256": "2BF43F221E2FBAB1ADD9842CE85510B16A4A8595FBA625E42BAC703D1BCE9A39",
+      "expectedLength": 26314329,
+      "buildIds": ["wf-2026.08.19.11.06-cca46d60"]
+    },
+    {
+      "id": "EV-GHIDRA-FOCUSED-2A90",
+      "kind": "FOCUSED_PSEUDOCODE_EXPORT",
+      "confidence": "MEDIUM",
+      "summary": "The saved exact-build project reopened read-only and decompiled indexed internal RVA 0x2A90 successfully. This proves the focused workflow, not the recovered prototype's native truth.",
+      "sourcePath": "work/native-analysis/exports/wf-2026.08.19.11.06-cca46d60/pseudocode/2A90.json",
+      "expectedSha256": "D5DC39897B7B001A5224EB38C5362E0F2BA4325CA3E362E2A21A0563EEE63936",
+      "expectedLength": 849,
+      "buildIds": ["wf-2026.08.19.11.06-cca46d60"]
+    }
+  ],
+  "findings": [
+    {
+      "id": "H-NATIVE-001",
+      "hypothesis": "The missing SCRIPTS row is evidence that the Luau compiler/decompiler cannot represent the current TopMenu.",
+      "result": "FALSE",
+      "evidenceIds": ["EV-TOPMENU-LIVE-CAPTURE", "EV-SCRIPTS-MENU-REPORT"],
+      "conclusion": "Exact current bytecode verifies and its menu-building closure contract is statically recoverable. The rejected paths were native VM/introspection contracts."
+    },
+    {
+      "id": "H-NATIVE-002",
+      "hypothesis": "A statically asserted 48-byte CallInfo declaration proves frame ownership in the current client.",
+      "result": "FALSE",
+      "evidenceIds": ["EV-CALLINFO-IMPOSSIBLE", "EV-BOOTSTRAPPER-LUAU-HEADER"],
+      "conclusion": "The combined State/CallInfo frame arithmetic contradicted runtime invariants and cannot be used for ownership."
+    },
+    {
+      "id": "H-NATIVE-003",
+      "hypothesis": "Writing a new C++ decompiler engine is required before native analysis can improve.",
+      "result": "FALSE",
+      "evidenceIds": ["EV-GHIDRA-FUNCTION-INDEX", "EV-GHIDRA-FOCUSED-2A90"],
+      "conclusion": "Ghidra supplies the decompiler and headless analysis engine; RENOVICE supplies exact-build contracts, evidence, validation, and a friendly interface."
+    },
+    {
+      "id": "H-NATIVE-004",
+      "hypothesis": "The corrected TopMenu U17/U58 staged native wrapper is live-proven.",
+      "result": "UNRESOLVED",
+      "evidenceIds": ["EV-SCRIPTS-MENU-REPORT"],
+      "conclusion": "Offline gates pass, but the corrected artifact has not completed the live menu acceptance checklist."
+    },
+    {
+      "id": "H-NATIVE-005",
+      "hypothesis": "Ghidra's default 2 GB headless heap is sufficient for the current 45.6 MB Warframe executable.",
+      "result": "FALSE",
+      "evidenceIds": ["EV-GHIDRA-FUNCTION-INDEX"],
+      "conclusion": "The 2 GB run exhausted Java heap during x86 constant propagation. The accepted runner uses 8 GB and the successful exact-build run peaked above 6 GB."
+    },
+    {
+      "id": "H-NATIVE-006",
+      "hypothesis": "Eagerly decompiling every recovered function is a reliable default workflow.",
+      "result": "FALSE",
+      "evidenceIds": ["EV-GHIDRA-FUNCTION-INDEX"],
+      "conclusion": "Malformed speculative functions can block eager decompilation. The accepted architecture indexes every recovered function first and decompiles selected RVAs on demand."
+    },
+    {
+      "id": "H-NATIVE-007",
+      "hypothesis": "A complete exact-build index plus focused on-demand decompilation is a viable friendly native-analysis workflow.",
+      "result": "TRUE",
+      "evidenceIds": ["EV-GHIDRA-FUNCTION-INDEX", "EV-GHIDRA-FOCUSED-2A90"],
+      "conclusion": "The exact project saved 94,157 indexed functions and then reopened read-only to produce complete pseudocode for RVA 0x2A90. The GUI exposes both operations without converting decompiler guesses into accepted contracts."
+    }
+  ]
+}

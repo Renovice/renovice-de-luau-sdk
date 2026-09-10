@@ -1,0 +1,125 @@
+{
+  "binary_sha256": "40BC733B43E366A7E65CFB40BDFD13D3F71B268C65F3841155B593D3F3DBA5D3",
+  "binary_sha256_after": "40BC733B43E366A7E65CFB40BDFD13D3F71B268C65F3841155B593D3F3DBA5D3",
+  "fixtures_expected": 19,
+  "fixtures_passed": 19,
+  "case_assertions": 3213,
+  "records": [
+    {
+      "fixture": "loop_exit_fixture.luau",
+      "assertions_per_cycle": 9,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "shared_return_fixture.luau",
+      "assertions_per_cycle": 24,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "stock_binary_search_fixture.luau",
+      "assertions_per_cycle": 36,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "exit_relay_fixture.luau",
+      "assertions_per_cycle": 56,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "return_continuation_fixture.luau",
+      "assertions_per_cycle": 24,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "value_temporary_fixture.luau",
+      "assertions_per_cycle": 33,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "index_and_first_loop_fixture.luau",
+      "assertions_per_cycle": 29,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "ordered_comparison_fixture.luau",
+      "assertions_per_cycle": 16,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "index_store_fixture.luau",
+      "assertions_per_cycle": 4,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "effectful_latch_fixture.luau",
+      "assertions_per_cycle": 29,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "shared_terminal_effect_fixture.luau",
+      "assertions_per_cycle": 15,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "shared_loop_guard_fixture.luau",
+      "assertions_per_cycle": 12,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "linear_return_guard_fixture.luau",
+      "assertions_per_cycle": 32,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "nested_repeat_guard_fixture.luau",
+      "assertions_per_cycle": 121,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "private_loop_terminal_fixture.luau",
+      "assertions_per_cycle": 517,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "root_repeat_return_fixture.luau",
+      "assertions_per_cycle": 66,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "stock_inventory_guard_fixture.luau",
+      "assertions_per_cycle": 8,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "stock_inventory_loop_fixture.luau",
+      "assertions_per_cycle": 24,
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "fixture": "stock_dojo_loop_fixture.luau",
+      "assertions_per_cycle": 16,
+      "cycles": 3,
+      "passed": true
+    }
+  ],
+  "failure": null,
+  "passed": true
+}

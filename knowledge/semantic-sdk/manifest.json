@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "generator": "RENOVICE_SEMANTIC_SDK_V1",
+  "sources": [
+    {
+      "id": "explicit-native-links",
+      "path": "semantic-sdk/registry/native_links.tsv",
+      "sha256": "9EDFFF59F362F682750C7C00AE133692C342F3BA6ADC435FF70D6289D31605E3",
+      "length": 74
+    },
+    {
+      "id": "lua-contracts",
+      "path": "api/warframe/contracts.tsv",
+      "sha256": "7B83A6EFC582C27BB92D7ADD48B16E528A5CAB255EBC8A57CFB211EEF0D68D51",
+      "length": 16777
+    },
+    {
+      "id": "lua-corpus-catalog",
+      "path": "api/warframe/selected_catalog.tsv",
+      "sha256": "1A3CCF00EA6C147C85B0F73D51C9E06F7AD5DC421C1AF16329A06225AEBC55AF",
+      "length": 49622
+    },
+    {
+      "id": "lua-evidence",
+      "path": "api/warframe/evidence.tsv",
+      "sha256": "230BFF23F1188054BB9655BC109D9558E969A79F24ECB70705E5466F74B02F4A",
+      "length": 10138
+    },
+    {
+      "id": "lua-full-callsite-census",
+      "path": "knowledge/research/DE LUAU TRANSLATOR/NATIVE API AND LIVE CANDIDATE CENSUS/result_consumption_sites.tsv",
+      "sha256": "F7CE896C2F32A0E4B6A7F3C7F254DCFC6B46FE8544E627D489D7C1C889D6AF14",
+      "length": 5733604
+    },
+    {
+      "id": "lua-negative-contracts",
+      "path": "api/warframe/negative_contracts.tsv",
+      "sha256": "001054608AC1B2838E057DA5008FC92378E8CDAEAFA33F67A3CD71985CB849BD",
+      "length": 2510
+    },
+    {
+      "id": "native-registry",
+      "path": "knowledge/native-analysis/registry/registry.json",
+      "sha256": "F7BA3B2782643DBE0A3631761D7E19B373CB0E416C3FB7F33C5C5834E065F522",
+      "length": 12558
+    }
+  ],
+  "outputs": [
+    {
+      "path": "semantic-sdk.json",
+      "sha256": "91E5707177683ADA90CF264C72CAA0FF16BB342ED17ABE735B3E5C6A1DFC83D3",
+      "length": 301302
+    },
+    {
+      "path": "symbols.tsv",
+      "sha256": "B0F89189BA5AC4CEBE5A189BB300C292DF53B8652F56DE8973723F4F8E25D87E",
+      "length": 50925
+    }
+  ]
+}

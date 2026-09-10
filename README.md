@@ -1,0 +1,80 @@
+# RENOVICE DE Luau SDK
+
+A standalone, GitHub-ready toolchain for the `09 03` DE Luau containers used by Warframe. It packages the working decompiler/recompiler, opcode and name knowledge, deterministic certification fixtures, and an optional evidence-backed readability/API layer in one repository.
+
+The repository intentionally excludes the extracted game-script corpus, the runtime bootstrapper, game files, and OpenWF server code. Point corpus audits at your own external extraction with `RENOVICE_CORPUS`.
+
+## Start here
+
+The checked-in Windows executables make the basic workflow immediately usable:
+
+```powershell
+# DE bytecode -> recompilable fidelity source
+.\renovice.ps1 decompile C:\path\Ability.lua_B .\work\Ability.fidelity.luau
+
+# Source -> DE 09 03 bytecode
+.\renovice.ps1 recompile .\work\Ability.fidelity.luau .\work\Ability.rebuilt.lua_B
+
+# Fidelity source plus readable source, provenance, and exact callsite map
+.\renovice.ps1 readable C:\path\Ability.lua_B .\work\Ability
+
+# Check intentional API calls before compiling an add-on
+.\renovice.ps1 api-check .\my-addon.luau
+
+# Local self-tests and a compiler-closed smoke round trip
+.\verify.ps1
+```
+
+Run `./build.ps1` to rebuild every native executable with warnings as errors, regenerate the API catalog from its pinned census, build and validate the Semantic SDK, and run the local verification suite. The build discovers `g++.exe` through `-Cxx`, `$env:CXX`, `PATH`, or the standard MSYS2 UCRT64 location.
+
+Before committing an intentional release change, stage it and run `python .\tools\update_manifest.py --write`, then stage the regenerated `MANIFEST.sha256`. The manifest hashes the canonical Git-blob bytes of every other tracked file, so line-ending conversion in a checkout cannot silently change the recorded release identity.
+
+## What each lane means
+
+| Lane | Output | What it establishes |
+|---|---|---|
+| Container | `de-roundtrip` | Parser plus writer can reproduce the exact input container for the tested file. |
+| Fidelity | `decompile-mod` then `recompile` | Recompilable source and a compiler-closed bytecode fixed point for the tested cycles. |
+| Readable | `semantic-ir-render-module-readable` | A verified fidelity twin, readable view, name provenance, and instruction-addressed API calls. |
+| API contract | `wf_api_check` and Semantic SDK | Known call shapes and evidence-backed contracts; unknowns stay visible. |
+| Live game | external injection and gameplay test | Actual runtime behavior for that exact artifact and game build. |
+
+These claims are separate. A fixed point does not mean that rebuilt bytes equal the original stock bytes, and neither claim proves live behavior.
+
+## Current evidence boundary
+
+A fresh standalone run on 2026-09-10 records a deterministic 360-file sample passing the raw `decompile-mod` source-and-bytecode fixed point with zero errors, plus the canonical 300/150 release gates. The same run measures the first rebuilt containers as **0/360 byte-identical to their original stock containers**. A separate unfiltered 5,386-file Semantic IR experiment still reported 20 ownership-manifest failures and 8 Semantic IR failures. See [Correctness boundaries](docs/CORRECTNESS_BOUNDARIES.md), the [fresh standalone certificate](docs/certificates/standalone-2026-09-10/RESULTS.md), and the [historical raw closeout](docs/certificates/raw360/RESULTS.md).
+
+Always rerun the relevant gate against the current binaries and your exact corpus before making a current claim. Historical proof files are evidence for their pinned artifacts, not a promise about an arbitrary build.
+
+## Repository map
+
+| Path | Purpose |
+|---|---|
+| `src/` | C++ DE container parser, Luau parser, transcoder, decompiler, Semantic IR, and renderers. |
+| `bin/` | Pinned Windows tools for immediate use. |
+| `data/` | Opcode/name maps and recovered metadata required by translation. |
+| `api/warframe/` | API contracts, evidence, negative findings, selection seeds, and generated catalog. |
+| `semantic-sdk/` | Deterministic C# generator/validator for the compact readable/API sidecar. |
+| `knowledge/` | Pinned census/native inputs and generated standalone Semantic SDK. |
+| `cert/` | Synthetic fixtures and gate harnesses. The 625 `.lua_B` fixtures total about 135 KB; they are not the game corpus. |
+| `docs/research/` | Concise positive and negative research findings. |
+| `docs/certificates/` | Curated historical proof records and hashes. |
+| `tools/` | API catalog/checker, behavior catalog, and focused research utilities. |
+
+Read [Architecture](ARCHITECTURE.md), [Decompiling](docs/DECOMPILING.md), [Recompiling](docs/RECOMPILING.md), [Readable/API layer](docs/READABLE_API_LAYER.md), and [Provenance](docs/PROVENANCE.md) before changing the translator.
+
+## External corpus certification
+
+The corpus is never committed. Set it explicitly and run the wrapper:
+
+```powershell
+$env:RENOVICE_CORPUS = 'D:\private\de-luau-stock'
+.\tools\verify-corpus.ps1 -Sample 360 -RunReleaseGates
+```
+
+The report states the denominator, mode, binary/frontend hashes, fixed-point partition, and original-byte result separately. Add `-RequireOriginalByteIdentity` only when that stricter property is actually required; it is expected to fail for the retained 360 stock sample.
+
+## Licensing
+
+No license has been selected for the RENOVICE source in this assembled repository. That decision belongs to the project owner before public distribution. The bundled Luau components retain their upstream license in `third-party/luau/LICENSE.txt`; see `THIRD_PARTY_NOTICES.md`.

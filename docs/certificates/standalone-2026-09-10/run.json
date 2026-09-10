@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "result": "PASS",
+  "utc": "2026-09-10T09:11:15.4499642Z",
+  "corpus": "<external-corpus>",
+  "corpus_file_count": 5386,
+  "sample": 360,
+  "mode": "decompile-mod",
+  "workers": 4,
+  "require_original_byte_identity": false,
+  "release_gates_run": true,
+  "derecomp_sha256": "60157E2FD66E884E089AA7762AA7C5CD79C67748A502B7885FF6FEAE5AB46D6C",
+  "luau_compile_sha256": "6156A05D9CAF9FA84E58BAECA79A244F47D86B8982F5425F2CA3E23B976ED2A4",
+  "idempotence_report": "idempotence.json",
+  "release_report": "release-gates.json"
+}

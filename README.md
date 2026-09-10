@@ -43,7 +43,13 @@ These claims are separate. A fixed point does not mean that rebuilt bytes equal 
 
 ## Current evidence boundary
 
-A fresh standalone run on 2026-09-10 records a deterministic 360-file sample passing the raw `decompile-mod` source-and-bytecode fixed point with zero errors, plus the canonical 300/150 release gates. The same run measures the first rebuilt containers as **0/360 byte-identical to their original stock containers**. A separate unfiltered 5,386-file Semantic IR experiment still reported 20 ownership-manifest failures and 8 Semantic IR failures. See [Correctness boundaries](docs/CORRECTNESS_BOUNDARIES.md), the [fresh standalone certificate](docs/certificates/standalone-2026-09-10/RESULTS.md), and the [historical raw closeout](docs/certificates/raw360/RESULTS.md).
+The historical base source pipeline did reach **5,386/5,386 files decompiled and recompiled** on 2026-07-26. A separate instruction/container editor also recorded a **5,386/5,386 byte-identical no-op round trip**. Those are valid historical results for their then-current artifacts; the source compiler result was never a claim that its rebuilt containers matched the stock containers byte for byte.
+
+A fresh standalone run on 2026-09-10 records a deterministic 360-file sample passing the raw `decompile-mod` source-and-bytecode fixed point with zero errors, plus the canonical 300/150 release gates. The same run measures the first rebuilt containers as **0/360 byte-identical to their original stock containers**.
+
+The current binary was also revalidated against all 5,386 external stock inputs. The strict two-cycle `decompile-mod` result is **5,070 fixed-point passes, 315 successful decompile/recompile cases with cycle drift, and 1 source-rendering exception**. The exception is `Lotus_Powersuits_Jade_Abilities_Chaos.lua_B`; its container parser/writer round trip remains byte exact, while every current module-source rendering mode terminates at an uncaught `std::out_of_range` / `map::at`. This current result does not invalidate the historical 5,386/5,386 pass, but it means the present source emitter cannot truthfully carry that full-corpus claim until the regression and the 315 stability drifts are closed.
+
+A separate unfiltered 5,386-file Semantic IR experiment reported 20 ownership-manifest failures and 8 Semantic IR failures. That optional readability result is not a base decompile/recompile failure count. See [Correctness boundaries](docs/CORRECTNESS_BOUNDARIES.md), the [current full-corpus revalidation](docs/certificates/full-corpus-2026-09-10/RESULTS.md), the [fresh standalone certificate](docs/certificates/standalone-2026-09-10/RESULTS.md), and the [historical raw closeout](docs/certificates/raw360/RESULTS.md).
 
 Always rerun the relevant gate against the current binaries and your exact corpus before making a current claim. Historical proof files are evidence for their pinned artifacts, not a promise about an arbitrary build.
 

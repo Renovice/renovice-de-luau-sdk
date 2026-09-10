@@ -14,6 +14,38 @@ Every report must identify the exact binary, Luau frontend, mode, inputs, denomi
 
 ## Retained measured state
 
+### Full 5,386-file base source history and current revalidation
+
+The 2026-07-26 toolchain finding records **5,386 files, 0 failures** for the
+base source pipeline: every shipped script in that corpus decompiled and
+recompiled. Preserve that as a valid historical result. It establishes broad
+source-pipeline processability for the pinned historical artifacts; it does
+not establish original-stock byte identity, compiler-closed idempotence, or
+live execution of all 5,386 outputs.
+
+The current standalone binary was re-run against all 5,386 stock inputs on
+2026-09-10 in raw `decompile-mod` mode. The strict two-cycle partition is:
+
+- 5,070 source-and-bytecode fixed-point passes;
+- 315 files that successfully decompile and recompile in both cycles but drift
+  between cycle 1 and cycle 2;
+- 1 execution error while rendering
+  `Lotus_Powersuits_Jade_Abilities_Chaos.lua_B`;
+- 0 input-integrity changes and 0 first-rebuild original-stock byte matches.
+
+The failing Jade container independently passes `de-roundtrip` with all 20
+prototype bodies byte identical. `decompile-mod-raw`, `decompile-mod-stable`,
+and `decompile-mod` all terminate with the same uncaught
+`std::out_of_range` / `map::at`. The current standalone and source-toolchain
+`derecomp.exe` files have the same SHA-256, so standalone packaging is ruled
+out as the cause. A historical hash for that exact input was not retained, so
+the precise change point cannot yet be proven solely from saved artifacts.
+
+See `docs/certificates/full-corpus-2026-09-10/RESULTS.md` and its compact
+`summary.json` for the pinned current result.
+
+### Current 360-file release certificate
+
 The fresh standalone certificate at
 `docs/certificates/standalone-2026-09-10/RESULTS.md` passed 360/360 raw fixed
 points, 5/5 default ten-cycle witnesses, and every canonical 300/150 release
@@ -21,7 +53,7 @@ gate with zero integrity errors. It independently reports 0/360 original-stock
 byte identity. Its current `derecomp.exe` hash is
 `60157E2FD66E884E089AA7762AA7C5CD79C67748A502B7885FF6FEAE5AB46D6C`.
 
-Historical evidence remains useful for the defects and broader witness set:
+Historical 360 evidence remains useful for the defects and broader witness set:
 
 The historical raw closeout in `docs/certificates/raw360/RESULTS.md` records:
 

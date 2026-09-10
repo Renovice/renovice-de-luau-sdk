@@ -103,3 +103,22 @@ before hashing and publication. Pinned tables and proof JSON are normalized to
 LF before `SOURCE_INVENTORY.json` and `MANIFEST.sha256` are generated. Final
 acceptance requires worktree bytes and staged Git blobs to be identical for
 every pinned artifact.
+
+## Hypothesis 5
+
+The historical 5,386/5,386 base decompile/recompile result can be repeated as
+a strict two-cycle fixed-point result with the current standalone binary.
+
+**Result: FALSE.** A fresh raw `decompile-mod` run over all 5,386 external
+inputs produced 5,070 fixed-point passes, 315 successful two-cycle
+decompile/recompile cases with source and/or bytecode drift, and one
+source-rendering exception. The error is
+`Lotus_Powersuits_Jade_Abilities_Chaos.lua_B`, which terminates with an
+uncaught `std::out_of_range` / `map::at` in all three module-source modes.
+
+The Jade input still passes exact `de-roundtrip` for all 20 prototype bodies.
+The original current toolchain binary and standalone binary have the same
+SHA-256, so the failure is not a packaging mutation. The July 26 historical
+record remains valid for its earlier artifacts, but the present emitter needs
+a full-corpus regression repair before the current build can inherit that
+claim. See `docs/certificates/full-corpus-2026-09-10/RESULTS.md`.

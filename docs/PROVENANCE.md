@@ -1,6 +1,6 @@
 # Provenance and repository assembly
 
-This standalone repository was assembled on 2026-09-10 from the active RENOVICE workspace without modifying its source repositories.
+This standalone repository was assembled on 2026-09-10 from the active RENOVICE workspace without modifying its source repositories. On 2026-09-17 it was synchronized with the current translator, API/name data, Semantic SDK source, generated SDK, and the intervening runtime-value research. `SOURCE_INVENTORY.json` records the current assembly timestamp and hashes; the external-corpus certificates retain their original measurement dates and are not silently relabeled as fresh runs.
 
 | Standalone path | Source role |
 |---|---|

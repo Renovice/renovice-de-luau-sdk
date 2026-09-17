@@ -11,20 +11,20 @@
     {
       "id": "lua-contracts",
       "path": "api/warframe/contracts.tsv",
-      "sha256": "7B83A6EFC582C27BB92D7ADD48B16E528A5CAB255EBC8A57CFB211EEF0D68D51",
-      "length": 16777
+      "sha256": "5C29AE87145A2C42C7AAD9AC4BC2212FB202C611DC301545495FC9295B5D18C2",
+      "length": 26163
     },
     {
       "id": "lua-corpus-catalog",
       "path": "api/warframe/selected_catalog.tsv",
-      "sha256": "1A3CCF00EA6C147C85B0F73D51C9E06F7AD5DC421C1AF16329A06225AEBC55AF",
-      "length": 49622
+      "sha256": "4B29EC9E8FCAAE1D9DC7C4C1429F5F77DB6C206CA89534EBD9E1625E92297C7F",
+      "length": 49599
     },
     {
       "id": "lua-evidence",
       "path": "api/warframe/evidence.tsv",
-      "sha256": "230BFF23F1188054BB9655BC109D9558E969A79F24ECB70705E5466F74B02F4A",
-      "length": 10138
+      "sha256": "A285364DD2059DD993E17315DC05A3C6F32040B0596AEF8D06CE7D861C930846",
+      "length": 21418
     },
     {
       "id": "lua-full-callsite-census",
@@ -35,8 +35,8 @@
     {
       "id": "lua-negative-contracts",
       "path": "api/warframe/negative_contracts.tsv",
-      "sha256": "001054608AC1B2838E057DA5008FC92378E8CDAEAFA33F67A3CD71985CB849BD",
-      "length": 2510
+      "sha256": "A75F28460A3F157828B7447FF3DB628B581AA0CC4F7EB9EB60787B9F7F02247B",
+      "length": 6451
     },
     {
       "id": "native-registry",
@@ -48,13 +48,13 @@
   "outputs": [
     {
       "path": "semantic-sdk.json",
-      "sha256": "91E5707177683ADA90CF264C72CAA0FF16BB342ED17ABE735B3E5C6A1DFC83D3",
-      "length": 301302
+      "sha256": "358C94AD69A08DDB6D68357B077875955C05DDFC7F3D5AD31622D81DF1D4219D",
+      "length": 352727
     },
     {
       "path": "symbols.tsv",
-      "sha256": "B0F89189BA5AC4CEBE5A189BB300C292DF53B8652F56DE8973723F4F8E25D87E",
-      "length": 50925
+      "sha256": "860EFFE01A51342A8A4529A2127D0EBEAB71153851A4304454FE17D7B592719E",
+      "length": 54736
     }
   ]
 }

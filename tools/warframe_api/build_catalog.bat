@@ -2,10 +2,16 @@
 setlocal
 cd /d "%~dp0\..\.."
 if not exist "bin" mkdir "bin"
-rem The standalone repository bundles the audited census under knowledge.
-rem RENOVICE_CENSUS_SITES remains an explicit override for a newly audited one.
+rem PATH AUTHORITY: resolve the audited census through WORKSPACE.json
+rem (protected.research + the census folder). RENOVICE_WORKSPACE_ROOT and
+rem RENOVICE_CENSUS_SITES override for isolated reproduction. The old
+rem "..\RESEARCH\..." relative path was broken (no such sibling) and is NOT
+rem a supported fallback.
+set "WS_ROOT=%RENOVICE_WORKSPACE_ROOT%"
+if "%WS_ROOT%"=="" for %%I in ("%CD%\..\..\..") do set "WS_ROOT=%%~fI"
+if "%WS_ROOT:~-1%"=="\" set "WS_ROOT=%WS_ROOT:~0,-1%"
 set "CENSUS_SITES=%RENOVICE_CENSUS_SITES%"
-if "%CENSUS_SITES%"=="" set "CENSUS_SITES=%CD%\knowledge\research\DE LUAU TRANSLATOR\NATIVE API AND LIVE CANDIDATE CENSUS\result_consumption_sites.tsv"
+if "%CENSUS_SITES%"=="" set "CENSUS_SITES=%WS_ROOT%\RESEARCH\DE LUAU TRANSLATOR\NATIVE API AND LIVE CANDIDATE CENSUS\result_consumption_sites.tsv"
 if not exist "%CENSUS_SITES%" (
   echo [wf_api] FAIL: audited census not found at "%CENSUS_SITES%"
   exit /b 1

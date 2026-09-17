@@ -43,6 +43,14 @@ These claims are separate. A fixed point does not mean that rebuilt bytes equal 
 
 ## Current evidence boundary
 
+The portable repository was synchronized with the active translator, API
+contracts, name data, Semantic SDK, and post-Ice-Wave runtime-value findings on
+2026-09-17. The rebuilt current SDK contains **258 symbols, 64 deep contracts,
+225 catalog symbols, 41 evidence records, and 29 negative findings**. This
+source/API synchronization does not replace the separately dated external
+corpus certificates below; rerun the applicable corpus gate against your exact
+inputs before making a current whole-corpus claim.
+
 The historical base source pipeline did reach **5,386/5,386 files decompiled and recompiled** on 2026-07-26. A separate instruction/container editor also recorded a **5,386/5,386 byte-identical no-op round trip**. Those are valid historical results for their then-current artifacts; the source compiler result was never a claim that its rebuilt containers matched the stock containers byte for byte.
 
 A fresh standalone run on 2026-09-10 records a deterministic 360-file sample passing the raw `decompile-mod` source-and-bytecode fixed point with zero errors, plus the canonical 300/150 release gates. The same run measures the first rebuilt containers as **0/360 byte-identical to their original stock containers**.

@@ -19,20 +19,20 @@
     {
       "id": "lua-contracts",
       "path": "api/warframe/contracts.tsv",
-      "sha256": "7B83A6EFC582C27BB92D7ADD48B16E528A5CAB255EBC8A57CFB211EEF0D68D51",
-      "length": 16777
+      "sha256": "5C29AE87145A2C42C7AAD9AC4BC2212FB202C611DC301545495FC9295B5D18C2",
+      "length": 26163
     },
     {
       "id": "lua-corpus-catalog",
       "path": "api/warframe/selected_catalog.tsv",
-      "sha256": "1A3CCF00EA6C147C85B0F73D51C9E06F7AD5DC421C1AF16329A06225AEBC55AF",
-      "length": 49622
+      "sha256": "4B29EC9E8FCAAE1D9DC7C4C1429F5F77DB6C206CA89534EBD9E1625E92297C7F",
+      "length": 49599
     },
     {
       "id": "lua-evidence",
       "path": "api/warframe/evidence.tsv",
-      "sha256": "230BFF23F1188054BB9655BC109D9558E969A79F24ECB70705E5466F74B02F4A",
-      "length": 10138
+      "sha256": "A285364DD2059DD993E17315DC05A3C6F32040B0596AEF8D06CE7D861C930846",
+      "length": 21418
     },
     {
       "id": "lua-full-callsite-census",
@@ -43,8 +43,8 @@
     {
       "id": "lua-negative-contracts",
       "path": "api/warframe/negative_contracts.tsv",
-      "sha256": "001054608AC1B2838E057DA5008FC92378E8CDAEAFA33F67A3CD71985CB849BD",
-      "length": 2510
+      "sha256": "A75F28460A3F157828B7447FF3DB628B581AA0CC4F7EB9EB60787B9F7F02247B",
+      "length": 6451
     },
     {
       "id": "native-registry",
@@ -349,6 +349,37 @@
       "nativeTypeIds": []
     },
     {
+      "id": "lua:global_function:Lotus_Game:IsTimerBuff",
+      "kind": "global_function",
+      "owner": "Lotus_Game",
+      "name": "IsTimerBuff",
+      "minArguments": 1,
+      "maxArguments": 1,
+      "parameters": [
+        {
+          "name": "buffType",
+          "type": "number"
+        }
+      ],
+      "returns": [
+        "boolean"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "local_read",
+      "lifetime": "Boolean result consumed immediately",
+      "notes": "HudRedux prototypes 76 and 198 use the native classification function before decrementing or formatting buffData as seconds. Logger preserves unavailable classification and raw numbers instead of guessing unknown type IDs.",
+      "evidenceIds": [
+        "WF-STOCK-UNIVERSAL-HUD-BUFFS-2026-09-15"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
       "id": "lua:global_function:_GLOBAL:IsNull",
       "kind": "global_function",
       "owner": "_GLOBAL",
@@ -392,6 +423,37 @@
         "evidenceGrade": "DEEP_CONTRACT",
         "rationale": "Stock null guard used before borrowed-object dereference."
       },
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
+      "id": "lua:global_function:_GLOBAL:WeakResource",
+      "kind": "global_function",
+      "owner": "_GLOBAL",
+      "name": "WeakResource",
+      "minArguments": 1,
+      "maxArguments": 1,
+      "parameters": [
+        {
+          "name": "type",
+          "type": "Type"
+        }
+      ],
+      "returns": [
+        "ResourceOrNil"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "local_read",
+      "lifetime": "Borrowed already-loaded resource; null-check immediately; no load ownership",
+      "notes": "HudRedux prototype 76 weakly resolves each mAbilityType for invalid-buff-data checks. Logger uses the weak lookup for names without invoking stock Resource loading. Absent resources have unavailable names and retained raw type identity.",
+      "evidenceIds": [
+        "WF-STOCK-UNIVERSAL-HUD-BUFFS-2026-09-15"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
       "nativeFunctionIds": [],
       "nativeTypeIds": []
     },
@@ -1588,6 +1650,33 @@
       "nativeTypeIds": []
     },
     {
+      "id": "lua:method:Avatar:GetBuffNotifications",
+      "kind": "method",
+      "owner": "Avatar",
+      "name": "GetBuffNotifications",
+      "minArguments": 0,
+      "maxArguments": 0,
+      "parameters": [],
+      "returns": [
+        "tableOrNil"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "local_read",
+      "lifetime": "Native-owned buff notifications; copy supported fields immediately; do not mutate or retain wrappers",
+      "notes": "HudRedux prototype 147 reads the Avatar list when rebuilding HUD buffs and vehicle rider buffs. This is distinct from the HudStatus queue; hidden non-HUD upgrades and complete contributor decomposition remain unverified. Current executable native getters return nil for zero records and a dense table of copied notification userdata for populated records; nil is a successful empty result.",
+      "evidenceIds": [
+        "WF-NATIVE-HUD-EMPTY-LIST-2026-09-15",
+        "WF-STOCK-UNIVERSAL-HUD-BUFFS-2026-09-15"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
       "id": "lua:method:Avatar:GetPlayer",
       "kind": "method",
       "owner": "Avatar",
@@ -1641,6 +1730,32 @@
       "nativeTypeIds": []
     },
     {
+      "id": "lua:method:Avatar:GetScriptBlackboard",
+      "kind": "method",
+      "owner": "Avatar",
+      "name": "GetScriptBlackboard",
+      "minArguments": 0,
+      "maxArguments": 0,
+      "parameters": [],
+      "returns": [
+        "table"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "local_read",
+      "lifetime": "Borrowed mutable script-state table; copy supported fields immediately; never assume complete engine buff attribution",
+      "notes": "Stock NokkoPowerShroom reads and writes NokkoPowerBuff.buffAmount and duration through the returned table. This proves script-owned state access, not that every Arcane, mod, shard or native buff appears here. The universal logger copies bounded numeric/boolean fields without mutating the table.",
+      "evidenceIds": [
+        "WF-STOCK-AVATAR-SCRIPT-BLACKBOARD-2026-09-15"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
       "id": "lua:method:Avatar:GetSuit",
       "kind": "method",
       "owner": "Avatar",
@@ -1684,6 +1799,32 @@
         "evidenceGrade": "OBSERVED_STABLE_ARGS",
         "rationale": "Repeated object-return chain."
       },
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
+      "id": "lua:method:Avatar:GetVelocity",
+      "kind": "method",
+      "owner": "Avatar",
+      "name": "GetVelocity",
+      "minArguments": 0,
+      "maxArguments": 0,
+      "parameters": [],
+      "returns": [
+        "Vector3"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "local_read",
+      "lifetime": "Engine vector wrapper; copy numeric components immediately; retention and native layout unverified",
+      "notes": "Pinned Cloaking stock Avatar calls GetVelocity with zero explicit arguments and passes its result to Length. Pinned GrappleHookPower stock Avatar passes the result to Length, Normalize, scalar multiplication and ForceVelocity. These vector operations establish the Luau-facing Vector3 contract, not native layout or rank-aware movement speed.",
+      "evidenceIds": [
+        "WF-STOCK-AVATAR-VELOCITY-2026-09-15"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
       "nativeFunctionIds": [],
       "nativeTypeIds": []
     },
@@ -4472,6 +4613,32 @@
       "nativeTypeIds": []
     },
     {
+      "id": "lua:method:BuffResource:GetLocalizeTag",
+      "kind": "method",
+      "owner": "BuffResource",
+      "name": "GetLocalizeTag",
+      "minArguments": 0,
+      "maxArguments": 0,
+      "parameters": [],
+      "returns": [
+        "LocalizeTag"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "local_read",
+      "lifetime": "Engine-owned localization tag; copy its immediate string representation",
+      "notes": "HudRedux prototype 198 calls GetLocalizeTag on a resource built from mAbilityType for the generic buff display name. BuffResource denotes this Luau-facing resource context, not a guessed native binary class. Syndicate/controller special-name branches remain separate.",
+      "evidenceIds": [
+        "WF-STOCK-UNIVERSAL-HUD-BUFFS-2026-09-15"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
       "id": "lua:method:Customization:GetColors",
       "kind": "method",
       "owner": "Customization",
@@ -4510,6 +4677,32 @@
         "evidenceGrade": "OBSERVED_STABLE_SHAPE",
         "rationale": "Audited census proves one exact hash, one explicit argument, and one result at 28 sites; selector and ownership remain unresolved."
       },
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
+      "id": "lua:method:DamageControl:GetArmourRating",
+      "kind": "method",
+      "owner": "DamageControl",
+      "name": "GetArmourRating",
+      "minArguments": 0,
+      "maxArguments": 0,
+      "parameters": [],
+      "returns": [
+        "number"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "local_read",
+      "lifetime": "Numeric value result; receiver is engine-owned",
+      "notes": "Current stock PostCameraUpdateHud reads mDamageControl, verifies LotusDamageController, and calls GetArmourRating with zero explicit arguments for the displayed current armor value. No maximum-armor getter is claimed.",
+      "evidenceIds": [
+        "WF-STOCK-CURRENT-ARMOUR-RATING-2026-09-14"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
       "nativeFunctionIds": [],
       "nativeTypeIds": []
     },
@@ -4604,6 +4797,37 @@
         "evidenceGrade": "DEEP_CONTRACT",
         "rationale": "Live-confirmed current Overguard read."
       },
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
+      "id": "lua:method:DamageControl:Name__ff67e37d",
+      "kind": "method",
+      "owner": "DamageControl",
+      "name": "Name__ff67e37d",
+      "minArguments": 1,
+      "maxArguments": 1,
+      "parameters": [
+        {
+          "name": "damage_type",
+          "type": "number"
+        }
+      ],
+      "returns": [
+        "number"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "local_read",
+      "lifetime": "Borrowed engine-owned controller; read immediately",
+      "notes": "Exact unresolved DE native hash. Stock Frost logic subtracts its result from a desired per-type proc count, and HUD Redux displays it as the current stack count. Do not invent a human method name.",
+      "evidenceIds": [
+        "WF-STOCK-DAMAGE-CONTROL-PROC-COUNT-2026-09-13"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
       "nativeFunctionIds": [],
       "nativeTypeIds": []
     },
@@ -4747,6 +4971,65 @@
         "evidenceGrade": "OBSERVED_STABLE_SHAPE",
         "rationale": "Name and stable boolean use agree."
       },
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
+      "id": "lua:method:DamageData:GetBaseAmount",
+      "kind": "method",
+      "owner": "DamageData",
+      "name": "GetBaseAmount",
+      "minArguments": 0,
+      "maxArguments": 0,
+      "parameters": [],
+      "returns": [
+        "UpgradedValue"
+      ],
+      "labels": [],
+      "confidence": "LIVE_CONFIRMED",
+      "status": "CONFIRMED",
+      "authority": "local_read",
+      "lifetime": "Borrowed packet-local live wrapper; copy GetModifiedValue to an immutable Lua number before SetBaseAmount if the old numeric value must survive mutation",
+      "notes": "Returns the packet\u0027s UpgradedValue-compatible wrapper. Stock scripts call GetModifiedValue for the numeric amount or mutate the wrapper. Live Ice Wave trace proved a retained wrapper is not a numeric snapshot: after SetBaseAmount changed the packet from 1771 to 5313, the retained wrapper also read 5313. Preserve a required old value as a Lua number and construct a new wrapper when restoring.",
+      "evidenceIds": [
+        "WF-LIVE-ICE-WAVE-BASE-AMOUNT-2026-09-13",
+        "WF-LIVE-ICE-WAVE-UPGRADEDVALUE-ALIAS-2026-09-14",
+        "WF-STOCK-DAMAGE-DATA-BASE-AMOUNT-2026-09-13"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
+      "id": "lua:method:DamageData:GetDamagePct",
+      "kind": "method",
+      "owner": "DamageData",
+      "name": "GetDamagePct",
+      "minArguments": 1,
+      "maxArguments": 1,
+      "parameters": [
+        {
+          "name": "damage_type",
+          "type": "number"
+        }
+      ],
+      "returns": [
+        "number"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "local_read",
+      "lifetime": "Numeric packet value; read during the current transaction",
+      "notes": "Returns the fraction assigned to one numeric damage-type index. Stock StatCompare iterates indices 0 through 19 and multiplies each returned fraction by GetBaseAmount():GetModifiedValue(). Human names for all indices are outside this contract.",
+      "evidenceIds": [
+        "WF-STOCK-DAMAGE-DATA-PERCENT-2026-09-13"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
       "nativeFunctionIds": [],
       "nativeTypeIds": []
     },
@@ -5466,7 +5749,7 @@
         "CORE",
         "HIGH_CONFIDENCE"
       ],
-      "confidence": "OBSERVED_STABLE_ARGS",
+      "confidence": "DEEP_CONTRACT",
       "status": "CATALOG_ONLY",
       "evidenceIds": [],
       "sourceKinds": [
@@ -5489,7 +5772,7 @@
           "TABLE_ITER",
           "UNKNOWN"
         ],
-        "evidenceGrade": "OBSERVED_STABLE_ARGS",
+        "evidenceGrade": "DEEP_CONTRACT",
         "rationale": "Strong table-iteration evidence; key/value schema unresolved."
       },
       "nativeFunctionIds": [],
@@ -6167,6 +6450,130 @@
       "nativeTypeIds": []
     },
     {
+      "id": "lua:method:GameRules:GetNetPersistentVar",
+      "kind": "method",
+      "owner": "GameRules",
+      "name": "GetNetPersistentVar",
+      "minArguments": 1,
+      "maxArguments": 2,
+      "parameters": [
+        {
+          "name": "key",
+          "type": "Symbol"
+        },
+        {
+          "name": "default",
+          "type": "any"
+        }
+      ],
+      "returns": [
+        "any"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "mission_state_read",
+      "lifetime": "Returns the current mission-generation value; object-like return ownership depends on the stored value",
+      "notes": "Exact Mobile Defense DefenseStage prototype 22 reads CustomMissionTime with the two-argument form at instruction 139, while the wider exact mission corpus contains both one- and two-argument forms. The return type is deliberately any because stock consumers use different persistent keys as numbers, booleans, identifiers, and object-like values.",
+      "evidenceIds": [
+        "WF-MOBILE-DEFENSE-CUSTOM-MISSION-TIME-OWNER-2026-09-11"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
+      "id": "lua:method:GameRules:SetNetPersistentVar",
+      "kind": "method",
+      "owner": "GameRules",
+      "name": "SetNetPersistentVar",
+      "minArguments": 2,
+      "maxArguments": 2,
+      "parameters": [
+        {
+          "name": "key",
+          "type": "Symbol"
+        },
+        {
+          "name": "value",
+          "type": "any"
+        }
+      ],
+      "returns": [
+        "nil"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "authoritative_mission_state_write",
+      "lifetime": "Value persists for the current game-rules mission generation until overwritten or that generation ends",
+      "notes": "Stock mission modules write persistent values with exactly two explicit arguments. The Mobile Defense addon writes only CustomMissionTime at DefenseStage entry and restores its prior value on cleanup only while it still owns the exact value.",
+      "evidenceIds": [
+        "WF-MOBILE-DEFENSE-CUSTOM-MISSION-TIME-OWNER-2026-09-11"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
+      "id": "lua:method:HudMovieInstigator:GetHudStatus",
+      "kind": "method",
+      "owner": "HudMovieInstigator",
+      "name": "GetHudStatus",
+      "minArguments": 0,
+      "maxArguments": 0,
+      "parameters": [],
+      "returns": [
+        "HudStatusOrNil"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "local_read",
+      "lifetime": "Borrowed HUD status returned to stock HUD; stock owns queue clearing",
+      "notes": "HudRedux original proto147 obtains mMovie:GetInstigator(), stores that exact receiver, and calls GetHudStatus on it. HudMovieInstigator is a contextual role, not a guessed native class. V86 InventoryControl attribution is rejected by stock value provenance and live nil-method failures. Observe the actual stock native getter return; do not call this on combat InventoryControl.",
+      "evidenceIds": [
+        "WF-SHARED-BUFF-PIPELINE-REPAIR-2026-09-15"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
+      "id": "lua:method:HudStatus:GetBuffNotifications",
+      "kind": "method",
+      "owner": "HudStatus",
+      "name": "GetBuffNotifications",
+      "minArguments": 0,
+      "maxArguments": 0,
+      "parameters": [],
+      "returns": [
+        "tableOrNil"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "local_read",
+      "lifetime": "Native-owned queued notifications; stock HUD owns subsequent ClearBuffNotifications",
+      "notes": "HudRedux original proto147 obtains mMovie:GetInstigator(), then GetHudStatus on that exact result; proto76 reads the returned HudStatus queue, branches on addBuff and explicitly clears it. V86 InventoryControl receiver attribution is rejected; the instigator native class remains unresolved. Logging observes the returned list and never clears it. Current executable native getters return nil for zero records and a dense table of copied notification userdata for populated records; nil is a successful empty result.",
+      "evidenceIds": [
+        "WF-NATIVE-HUD-EMPTY-LIST-2026-09-15",
+        "WF-SHARED-BUFF-PIPELINE-REPAIR-2026-09-15",
+        "WF-STOCK-UNIVERSAL-HUD-BUFFS-2026-09-15"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
       "id": "lua:method:InputControl:EnableCrouch",
       "kind": "method",
       "owner": "InputControl",
@@ -6408,6 +6815,49 @@
         "evidenceGrade": "OBSERVED_STABLE_SHAPE",
         "rationale": "Audited census proves one exact hash, zero explicit arguments, and one result at 38 sites; absent-weapon behavior remains unresolved."
       },
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
+      "id": "lua:method:InventoryControl:GetUpgradeModifiedValue",
+      "kind": "method",
+      "owner": "InventoryControl",
+      "name": "GetUpgradeModifiedValue",
+      "minArguments": 4,
+      "maxArguments": 4,
+      "parameters": [
+        {
+          "name": "base",
+          "type": "number"
+        },
+        {
+          "name": "operation",
+          "type": "UpgradeType"
+        },
+        {
+          "name": "validType",
+          "type": "Type"
+        },
+        {
+          "name": "context",
+          "type": "PowerSuit"
+        }
+      ],
+      "returns": [
+        "number"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "local_calculation",
+      "lifetime": "Numeric result copied immediately; native upgrade storage remains engine-owned",
+      "notes": "Only the verified four-explicit-argument active-suit overload is certified. AlchemistDistill stock prototype 12 NAMECALL 45 reads (1,4,suit:GetType(),suit) and converts the result into CrewShipInfo EnergyCost. Operation 4 is AVATAR_ABILITY_EFFICIENCY in both shipped enum indices. Other overloads and universal channelled energy-cost behavior remain unverified.",
+      "evidenceIds": [
+        "WF-STOCK-INVENTORY-EFFICIENCY-2026-09-15"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
       "nativeFunctionIds": [],
       "nativeTypeIds": []
     },
@@ -7011,7 +7461,7 @@
       "labels": [
         "CORE"
       ],
-      "confidence": "OBSERVED_VARIABLE_OR_OPEN",
+      "confidence": "DEEP_CONTRACT",
       "status": "CATALOG_ONLY",
       "evidenceIds": [],
       "sourceKinds": [
@@ -7040,7 +7490,7 @@
           "STORED_RETURNED",
           "TABLE_ITER"
         ],
-        "evidenceGrade": "OBSERVED_VARIABLE_OR_OPEN",
+        "evidenceGrade": "DEEP_CONTRACT",
         "rationale": "Core ability stat scaling; observed overloads require deeper typing."
       },
       "nativeFunctionIds": [],
@@ -7462,8 +7912,9 @@
       "status": "CONFIRMED",
       "authority": "dispatch_metadata",
       "lifetime": "Packet-local value",
-      "notes": "Stock Mallet uses damage type 7 at fraction 1.",
+      "notes": "Stock Mallet uses damage type 7 at fraction 1. The shipped DamageType enum index maps 11 to DT_VIRAL; stock NokkoPowerShroom also writes type 11 at fraction 1. The 2026-09-15 Torid user test and ten exact health-amplification ratios confirm status identifier 11 as Viral in that live diagnostic profile. Other status counters are not individually live-certified by this observation.",
       "evidenceIds": [
+        "WF-LIVE-VIRAL-STATUS-ID-11-2026-09-15",
         "WF-STOCK-BARD-BOXLOOP"
       ],
       "sourceKinds": [
@@ -8135,6 +8586,32 @@
         "evidenceGrade": "OBSERVED_VARIABLE_OR_OPEN",
         "rationale": "Core collision query; overload/return contract requires deeper typing."
       },
+      "nativeFunctionIds": [],
+      "nativeTypeIds": []
+    },
+    {
+      "id": "lua:method:Resource:GetFullName",
+      "kind": "method",
+      "owner": "Resource",
+      "name": "GetFullName",
+      "minArguments": 0,
+      "maxArguments": 0,
+      "parameters": [],
+      "returns": [
+        "string"
+      ],
+      "labels": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "local_read",
+      "lifetime": "Immediate string identity; resource remains engine-owned",
+      "notes": "HudRedux prototype 198 constructs Resource(notification.abilityType) and uses GetFullName on that resource in its missing-icon diagnostic. The logger uses only an already-loaded WeakResource, never loads icons or resources.",
+      "evidenceIds": [
+        "WF-STOCK-UNIVERSAL-HUD-BUFFS-2026-09-15"
+      ],
+      "sourceKinds": [
+        "DEEP_CONTRACT"
+      ],
       "nativeFunctionIds": [],
       "nativeTypeIds": []
     },
@@ -10428,11 +10905,17 @@
         "CORE",
         "HIGH_CONFIDENCE"
       ],
-      "confidence": "OBSERVED_STABLE_ARGS",
-      "status": "CATALOG_ONLY",
-      "evidenceIds": [],
+      "confidence": "STOCK_BYTECODE",
+      "status": "CONFIRMED",
+      "authority": "local_calculation",
+      "lifetime": "Numeric value result",
+      "notes": "Returns the final numeric value after the wrapper\u0027s existing modifiers. Stock damage consumers use this after GetBaseAmount.",
+      "evidenceIds": [
+        "WF-STOCK-DAMAGE-DATA-BASE-AMOUNT-2026-09-13"
+      ],
       "sourceKinds": [
-        "CORPUS_CATALOG"
+        "CORPUS_CATALOG",
+        "DEEP_CONTRACT"
       ],
       "corpus": {
         "sites": 323,
@@ -10454,7 +10937,7 @@
           "STORED",
           "TABLE_ITER"
         ],
-        "evidenceGrade": "OBSERVED_STABLE_ARGS",
+        "evidenceGrade": "DEEP_CONTRACT",
         "rationale": "Modified scalar read used arithmetically/stored."
       },
       "nativeFunctionIds": [],
@@ -10891,6 +11374,61 @@
       "buildIds": []
     },
     {
+      "id": "WF-LIVE-ICE-WAVE-BASE-AMOUNT-2026-09-13",
+      "domain": "LUA_API",
+      "kind": "live_private_client",
+      "result": "TRUE",
+      "confidence": "RECORDED",
+      "source": "../../runtime/bootstrapper-runtime/RENOVICE_DEPLOYMENTS/ICE_WAVE_UPGRADED_VALUE_FIX_2026-09-13/README.md",
+      "observed": "At exact Ice Wave target f62b70b45fc7fdf9 prototype 7 instruction 64 DamageDD.before, the protected provider trace recorded type(damageData:GetBaseAmount()) as userdata while the exact target and native arguments were resolved.",
+      "limitations": "This falsifies the earlier number return contract on the live Ice Wave packet and confirms the stock UpgradedValue access pattern is required. The concrete C\u002B\u002B template type remains unnamed.",
+      "buildIds": []
+    },
+    {
+      "id": "WF-LIVE-ICE-WAVE-HOOK-VISIBILITY-2026-09-13",
+      "domain": "LUA_API",
+      "kind": "live_private_client",
+      "result": "TRUE",
+      "confidence": "RECORDED",
+      "source": "../../runtime/bootstrapper-runtime/RENOVICE_SCRIPTING/CURRENT_BOOTSTRAPPER_STATE.md",
+      "observed": "The exact native DamageDD callbacks and trace bridge ran, but luaCalls prototype 7 before ran zero times in the same V69 test. The addon therefore had no Lua-entry batch even though the native stack identified prototype 7 and instruction 64.",
+      "limitations": "Proves that these two RENOVICE hook layers did not observe identical nested execution boundaries on this path. It does not claim that luaCalls misses every nested closure.",
+      "buildIds": []
+    },
+    {
+      "id": "WF-LIVE-ICE-WAVE-MATH-HUGE-NIL-2026-09-14",
+      "domain": "LUA_API",
+      "kind": "live_private_client",
+      "result": "TRUE",
+      "confidence": "RECORDED",
+      "source": "../../runtime/bootstrapper-runtime/RENOVICE_SCRIPTING/CURRENT_BOOTSTRAPPER_STATE.md",
+      "observed": "All 150 V70 SetBaseAmount callbacks failed with attempt to compare number less than nil. The only nil comparison operand was math.huge; replacing it with the literal ceiling 1e30 made the offline environment and later gameplay path proceed.",
+      "limitations": "Proves math.huge was unavailable in this deployed DE target-addon environment. It does not define the complete contents of the game\u0027s math table.",
+      "buildIds": []
+    },
+    {
+      "id": "WF-LIVE-ICE-WAVE-UPGRADEDVALUE-ALIAS-2026-09-14",
+      "domain": "LUA_API",
+      "kind": "live_private_client",
+      "result": "TRUE",
+      "confidence": "RECORDED",
+      "source": "../../runtime/bootstrapper-runtime/RENOVICE_SCRIPTING/RESEARCH/ICE_WAVE_NUMERIC_BASELINE_RESTORE_V73_2026-09-14.md",
+      "observed": "In live V72 batch 23, GetBaseAmount initially read 1771. After SetBaseAmount installed 5313, the retained stock UpgradedValue wrapper read 5313 rather than 1771, and the following zero-stack target observed the contaminated value.",
+      "limitations": "Proves this returned wrapper was a live packet view rather than an immutable numeric snapshot at the exact Ice Wave callsite. It does not prove that every UpgradedValue returned by every API aliases its owner.",
+      "buildIds": []
+    },
+    {
+      "id": "WF-LIVE-ICE-WAVE-USERDATA-ADDRESS-REUSE-2026-09-13",
+      "domain": "LUA_API",
+      "kind": "stock_bytecode_and_live_private_client",
+      "result": "TRUE",
+      "confidence": "RECORDED",
+      "source": "../../runtime/bootstrapper-runtime/RENOVICE_SCRIPTING/CURRENT_BOOTSTRAPPER_STATE.md",
+      "observed": "Exact stock raw source creates DamageData inside the target loop, while live traces show the native allocator reused one printed packet address across consecutive logical target packets. Pointer-based grouping carried one target\u0027s cached baseline into another.",
+      "limitations": "Falsifies logical transaction identity inferred only from Lua userdata equality or a repeated native address. It does not establish the allocator\u0027s general reuse policy.",
+      "buildIds": []
+    },
+    {
       "id": "WF-LIVE-MALLET-2026-08-23",
       "domain": "LUA_API",
       "kind": "live_private_server",
@@ -10946,6 +11484,17 @@
       "buildIds": []
     },
     {
+      "id": "WF-LIVE-VIRAL-STATUS-ID-11-2026-09-15",
+      "domain": "LUA_API",
+      "kind": "live_private_client_user_confirmed",
+      "result": "TRUE",
+      "confidence": "RECORDED",
+      "source": "../../../Documentation/03-Abilities-and-Combat/Damage-Type-and-Status-IDs.md",
+      "observed": "The user confirmed that Torid Viral area damage primed the enemies. All ten amplified V79 Ice Wave hits follow status identifier 11: one stack x2, two x2.25, three x2.5, four x2.75. Both shipped enum_index.json copies independently map DamageType 11 to DT_VIRAL; stock NokkoPowerShroom writes SetDamagePct(11,1).",
+      "limitations": "Confirms Viral identity in this live diagnostic profile, supported by the existing toolchain index and published status behavior. No direct live enum getter was called; other counters, complete native formulas and Brightbonnet per-target capture are not individually certified.",
+      "buildIds": []
+    },
+    {
       "id": "WF-MISSION-TIMER-OWNER-CALLS-2026-09-09",
       "domain": "LUA_API",
       "kind": "stock_bytecode",
@@ -10954,6 +11503,28 @@
       "source": "../../apps/ability-editor/RESEARCH/MISSION_TIMER_TARGET_ADDONS_2026-09-09.md",
       "observed": "Exact call maps contain 61 GetMission sites across Mobile Defense, Territory, and Excavation: every site has zero explicit arguments, one closed result, and no open argument or result width. Mobile Defense prototype 22 instruction 118 reads difficulty and maxWaveNum from that result; instruction 139 calls GetNetPersistentVar on the same game-rules receiver.",
       "limitations": "This proves the source-visible method shape and the mission fields consumed by the exact timer path. It does not prove the native descriptor class, ownership after the mission lifecycle, or behavior when no mission is active.",
+      "buildIds": []
+    },
+    {
+      "id": "WF-MOBILE-DEFENSE-CUSTOM-MISSION-TIME-OWNER-2026-09-11",
+      "domain": "LUA_API",
+      "kind": "stock_bytecode_and_runtime_failure",
+      "result": "TRUE",
+      "confidence": "RECORDED",
+      "source": "../../apps/ability-editor/RESEARCH/MISSION_TIMER_CRASH_RECOVERY_2026-09-11.md",
+      "observed": "Exact Mobile Defense prototype 22 reads CustomMissionTime from gGameRules at instruction 139 after calculating its stock total. Exact mission sources establish the one- and two-argument GetNetPersistentVar forms and the two-argument SetNetPersistentVar form; the failed deployed addon also proved that installing a process-wide native detour for this mission-local value was the wrong lifetime boundary.",
+      "limitations": "The stock evidence proves visible call shapes and mission-generation ownership. The exact native storage implementation, replication across every multiplayer authority arrangement, and the dynamic type of arbitrary persistent keys remain unresolved.",
+      "buildIds": []
+    },
+    {
+      "id": "WF-NATIVE-HUD-EMPTY-LIST-2026-09-15",
+      "domain": "LUA_API",
+      "kind": "native_static",
+      "result": "TRUE",
+      "confidence": "RECORDED",
+      "source": "../../../Documentation/03-Abilities-and-Combat/Universal-Buff-Capture-Repair-2026-09-15.md",
+      "observed": "Warframe.x64.exe SHA256 CCA46D604A498CD95F0D28E3E8F3EEE8833F5D362666A8E5C820C535F7C2AF93. Hash 0x156a31e6 method records resolve exact getter RVAs 0x1b17710 and 0x1b9a890. Zero native vector count branches call helper RVA0x55bdd0 which writes Luau nil tag0. Nonempty branches call RVA0xfadda0 which creates an array table and writes tag7, then copy notification userdata and return one result.",
+      "limitations": "Build-pinned return representation only. Does not establish every engine contributor is exposed, the V85 failed reads were all nil rather than thrown errors, or the repaired capture has live acceptance.",
       "buildIds": []
     },
     {
@@ -11001,6 +11572,39 @@
       "buildIds": []
     },
     {
+      "id": "WF-SHARED-BUFF-PIPELINE-REPAIR-2026-09-15",
+      "domain": "LUA_API",
+      "kind": "stock_bytecode_and_compiler_regression",
+      "result": "TRUE",
+      "confidence": "RECORDED",
+      "source": "../../../Documentation/03-Abilities-and-Combat/Shared-Buff-Pipeline-Repair-2026-09-15.md",
+      "observed": "Pinned HudRedux stock receiver is mMovie.GetInstigator, not InventoryControl. V86 observer has six name hashes in LOADK value positions; repaired compiler retains literal strings and remaps name uses. Live target activation replaces diagnostics-native contracts with addon-only requests; both paths now use one merged contract.",
+      "limitations": "Native class of HudMovieInstigator remains unresolved. Does not certify native Arcane capture, individual contributors or F9/off in game; candidate is not deployed.",
+      "buildIds": []
+    },
+    {
+      "id": "WF-STOCK-AVATAR-SCRIPT-BLACKBOARD-2026-09-15",
+      "domain": "LUA_API",
+      "kind": "stock_bytecode",
+      "result": "TRUE",
+      "confidence": "STOCK_BYTECODE",
+      "source": "../../../Documentation/03-Abilities-and-Combat/Caster-Efficiency-and-Buffs-2026-09-15.md",
+      "observed": "NokkoPowerShroom SHA256 E0DD6329CCA8844AD242E8C93CE2BAA0FC21D8C6C096271871BA9FF2B1D62C1A. Production Semantic IR renders all 27 prototypes; stock prototype 15 BuffLoop reads Avatar.GetScriptBlackboard and stores NokkoPowerBuff with buffAmount and duration, then updates/removes that state alongside the native upgrade calls.",
+      "limitations": "Confirms script-owned table state. Does not identify every native Arcane contributor or certify native function names for hashes 0xe470b32b, 0x90fde101 and 0x1747aac8.",
+      "buildIds": []
+    },
+    {
+      "id": "WF-STOCK-AVATAR-VELOCITY-2026-09-15",
+      "domain": "LUA_API",
+      "kind": "stock_bytecode",
+      "result": "TRUE",
+      "confidence": "STOCK_BYTECODE",
+      "source": "../../../Documentation/03-Abilities-and-Combat/Caster-Stats-2026-09-15.md",
+      "observed": "Cloaking stock SHA256 3B7EC356656CE3060C87EC995FC63FB69EA1C41C99A6FE78E794B8DCCD56D56F and GrappleHookPower stock SHA256 F08C20E10902DFF11307F5CA62BC0AE32245B4F595447C6DE75F54BDBCD90049. Their Avatar GetVelocity result is consumed by Length, Normalize, vector scalar multiplication and ForceVelocity. The pinned native census reports hash 0xf44643ae at 21 sites in 20 modules.",
+      "limitations": "Confirms zero-explicit-argument Luau vector getter at these stock sites. Does not prove native binary layout, allocation ownership, speed-modifier baseline or universal availability for non-Avatar receivers.",
+      "buildIds": []
+    },
+    {
       "id": "WF-STOCK-BARD-BOXLOOP",
       "domain": "LUA_API",
       "kind": "stock_bytecode",
@@ -11023,6 +11627,50 @@
       "buildIds": []
     },
     {
+      "id": "WF-STOCK-CURRENT-ARMOUR-RATING-2026-09-14",
+      "domain": "LUA_API",
+      "kind": "stock_bytecode",
+      "result": "TRUE",
+      "confidence": "STOCK_BYTECODE",
+      "source": "../../runtime/bootstrapper-runtime/RENOVICE_SCRIPTING/RESEARCH/BATTLE_LOG_V5_2026-09-14/Lotus_Interface_PostCameraUpdateHud.raw.luau:9763",
+      "observed": "Current stock PostCameraUpdateHud reads the target avatar mDamageControl field, verifies it is a LotusDamageController, and calls GetArmourRating with zero explicit arguments. The result feeds the HUD current-armor path. Hash d13a8941 resolves to GetArmourRating in the pinned verified namebase.",
+      "limitations": "Proves the current numeric armor read and receiver family at this stock site. It does not identify a maximum-armor getter, the complete native mitigation formula, or live availability on every borrowed wrapper.",
+      "buildIds": []
+    },
+    {
+      "id": "WF-STOCK-DAMAGE-CONTROL-PROC-COUNT-2026-09-13",
+      "domain": "LUA_API",
+      "kind": "stock_bytecode",
+      "result": "TRUE",
+      "confidence": "STOCK_BYTECODE",
+      "source": "../../runtime/bootstrapper-runtime/RESEARCH/FROST_ICE_WAVE_COLD_STACK_DAMAGE_2026-09-13/README.md",
+      "observed": "Stock Frost Avalanche obtains DamageControl, calls exact hash ff67e37d with damage type 4, subtracts that numeric result from a desired Cold proc count, and sends only the difference. HUD Redux calls the same hash by damage type and stores the result in mBuffDataExtra for stack display.",
+      "limitations": "The current per-type proc-count behavior and numeric result are proven by independent stock consumers. The human native name and exact C\u002B\u002B return type remain unresolved.",
+      "buildIds": []
+    },
+    {
+      "id": "WF-STOCK-DAMAGE-DATA-BASE-AMOUNT-2026-09-13",
+      "domain": "LUA_API",
+      "kind": "stock_bytecode",
+      "result": "TRUE",
+      "confidence": "STOCK_BYTECODE",
+      "source": "../../runtime/bootstrapper-runtime/RESEARCH/FROST_ICE_WAVE_COLD_STACK_DAMAGE_2026-09-13/README.md",
+      "observed": "The hash-pinned stock corpus repeatedly calls GetBaseAmount and then GetModifiedValue for the numeric damage. Other stock paths call AddModifier directly on the GetBaseAmount result or pass that wrapper to SetBaseAmount.",
+      "limitations": "This proves GetBaseAmount returns an UpgradedValue-compatible wrapper and GetModifiedValue returns its numeric result. It does not prove the underlying C\u002B\u002B scalar width or post-dispatch lifetime.",
+      "buildIds": []
+    },
+    {
+      "id": "WF-STOCK-DAMAGE-DATA-PERCENT-2026-09-13",
+      "domain": "LUA_API",
+      "kind": "stock_bytecode",
+      "result": "TRUE",
+      "confidence": "STOCK_BYTECODE",
+      "source": "RESEARCH/ABILITY CARD UI/PIPELINE_AUDIT_2026-08-24/GENERATED/StatCompare.decompile.luau:13302",
+      "observed": "Stock StatCompare reads GetBaseAmount():GetModifiedValue(), iterates numeric damage-type indices 0 through 19, calls GetDamagePct(index), and multiplies the numeric fraction by the base amount before displaying each positive component.",
+      "limitations": "Proves the zero-explicit-side-effect read shape, numeric index range used by this stock consumer, and numeric return consumption. It does not prove human names for every index, packet lifetime beyond the current call, or damage actually removed after mitigation.",
+      "buildIds": []
+    },
+    {
       "id": "WF-STOCK-GENERIC-SETTINGS-UI-2026-08-27",
       "domain": "LUA_API",
       "kind": "stock_bytecode_and_live_private_client",
@@ -11042,6 +11690,28 @@
       "source": "RESEARCH/WARFRAME NATIVE API CONTRACTS/2026-08-27_GRAVITY_LIFECYCLE_LIVE_CONTRACT.md",
       "observed": "The audited corpus has GetLocalPlayerAvatar at 39 sites/32 modules with zero explicit arguments, AddGravityMultiplier at 11 sites/11 modules with three explicit arguments, and RemoveGravityMultiplier at 18 sites/11 modules with one source-visible argument. Stock Berserker code performs AddGravityMultiplier(identifier, 0, -1) and later RemoveGravityMultiplier(identifier).",
       "limitations": "Return values are unused. Exact key-type family, nonzero multiplier semantics, duration units, replication, and absent-local-avatar behavior are not established by call shape alone.",
+      "buildIds": []
+    },
+    {
+      "id": "WF-STOCK-INVENTORY-EFFICIENCY-2026-09-15",
+      "domain": "LUA_API",
+      "kind": "stock_bytecode",
+      "result": "TRUE",
+      "confidence": "STOCK_BYTECODE",
+      "source": "../../../Documentation/03-Abilities-and-Combat/Caster-Efficiency-and-Buffs-2026-09-15.md",
+      "observed": "AlchemistDistill SHA256 69B941673B1CA338EE1AA1DEFF83AE2459F4C5A51A7D23CF1DDB2B2C76104455 prototype 12 NAMECALL instruction 45 (word PC 56) reads InventoryControl.GetUpgradeModifiedValue(1,4,suitType,suit). Production Semantic IR verifies the prototype and renders the complete module. The result is converted to EnergyCost in CrewShipInfo. Both shipped enum_index.json files map UpgradeType 4 to AVATAR_ABILITY_EFFICIENCY.",
+      "limitations": "Confirms this unit query and four-argument active-suit overload. Raw upgrade percentage is not a universal final energy-cost formula; the stock conversion is path-specific. Live V84 query acceptance remains pending.",
+      "buildIds": []
+    },
+    {
+      "id": "WF-STOCK-UNIVERSAL-HUD-BUFFS-2026-09-15",
+      "domain": "LUA_API",
+      "kind": "stock_bytecode",
+      "result": "TRUE",
+      "confidence": "STOCK_BYTECODE",
+      "source": "../../../Documentation/03-Abilities-and-Combat/Universal-Buff-Logging-2026-09-15.md",
+      "observed": "HudRedux SHA256 FED729418F523ED04BDD610C5EC20787E5A83466F4D809184904C7741C331A49. Production Semantic IR full-module render and original prototypes 76,147,198 verify the HudStatus queue, Avatar HUD-rebuild list, native notification fields and generic HUD units. GetBuffNotifications name hash 0x156a31e6.",
+      "limitations": "Confirms stock Luau interfaces and HUD display-unit branches. Native wrapper matching and pure-native Arcane capture remain separate live gates; no full hidden-upgrade or exact stack attribution claim.",
       "buildIds": []
     }
   ],
@@ -11209,11 +11879,141 @@
       "evidenceIds": [
         "WF-ABILITY-BEHAVIOR-246-2026-09-08"
       ]
+    },
+    {
+      "id": "lua-negative-0010",
+      "domain": "LUA_API",
+      "hypothesis": "A wrapper returned by DamageData:GetBaseAmount is an immutable numeric snapshot",
+      "result": "FALSE",
+      "conclusion": "Treat it as a borrowed packet-local live wrapper on the proven Ice Wave path. Copy GetModifiedValue to a Lua number before mutating the packet when the old value must be restored.",
+      "evidenceIds": [
+        "WF-LIVE-ICE-WAVE-UPGRADEDVALUE-ALIAS-2026-09-14"
+      ]
+    },
+    {
+      "id": "lua-negative-0011",
+      "domain": "LUA_API",
+      "hypothesis": "Repeated Lua userdata equality or a repeated native address proves one logical damage transaction",
+      "result": "FALSE",
+      "conclusion": "Key transaction state to the exact call boundary and target-local control flow. Engine allocator reuse can give consecutive logical objects the same printed address.",
+      "evidenceIds": [
+        "WF-LIVE-ICE-WAVE-USERDATA-ADDRESS-REUSE-2026-09-13"
+      ]
+    },
+    {
+      "id": "lua-negative-0012",
+      "domain": "LUA_API",
+      "hypothesis": "An exact luaCalls hook and nativeCalls hook observe identical nested execution boundaries",
+      "result": "FALSE",
+      "conclusion": "Choose the hook layer proven to observe the authoritative operation. Native callsite ownership does not imply that a nested Lua-entry callback fired.",
+      "evidenceIds": [
+        "WF-LIVE-ICE-WAVE-HOOK-VISIBILITY-2026-09-13"
+      ]
+    },
+    {
+      "id": "lua-negative-0013",
+      "domain": "LUA_API",
+      "hypothesis": "The DE target-addon environment exposes every ordinary Luau math library field",
+      "result": "FALSE",
+      "conclusion": "Do not depend on an unproven standard-library member. Use compile-time numeric constants or probe and fail closed before gameplay mutation.",
+      "evidenceIds": [
+        "WF-LIVE-ICE-WAVE-MATH-HUGE-NIL-2026-09-14"
+      ]
+    },
+    {
+      "id": "lua-negative-0014",
+      "domain": "LUA_API",
+      "hypothesis": "A one-times target may skip SetBaseAmount after another target used the same mutable packet boundary",
+      "result": "FALSE",
+      "conclusion": "Write the authoritative stock numeric value explicitly for every target, including multiplier one, then restore from a newly constructed wrapper after the synchronous native call.",
+      "evidenceIds": [
+        "WF-LIVE-ICE-WAVE-UPGRADEDVALUE-ALIAS-2026-09-14"
+      ]
+    },
+    {
+      "id": "lua-negative-0015",
+      "domain": "LUA_API",
+      "hypothesis": "The raw Efficiency unit upgrade factor is the final energy-cost factor for every ability",
+      "result": "FALSE",
+      "conclusion": "AlchemistDistill CrewShipInfo explicitly transforms the returned factor before calculating EnergyCost. Preserve the raw observation and distinguish initial casts, channels, Duration and path-specific caps.",
+      "evidenceIds": [
+        "WF-STOCK-INVENTORY-EFFICIENCY-2026-09-15"
+      ]
+    },
+    {
+      "id": "lua-negative-0016",
+      "domain": "LUA_API",
+      "hypothesis": "A successful Avatar script blackboard query proves a complete list of active native buff contributors",
+      "result": "FALSE",
+      "conclusion": "Capture script-owned fields as observations. Keep total live stats separate from complete mod, shard and native Arcane attribution, which this table does not prove.",
+      "evidenceIds": [
+        "WF-STOCK-AVATAR-SCRIPT-BLACKBOARD-2026-09-15"
+      ]
+    },
+    {
+      "id": "lua-negative-0017",
+      "domain": "LUA_API",
+      "hypothesis": "A returned HUD notification list is a complete decomposition of every active engine upgrade",
+      "result": "FALSE",
+      "conclusion": "Capture native HUD notifications as observed. Preserve Avatar rebuild-list versus HudStatus queue origins; hidden buffs, mods, shards and causal contributor decomposition remain unverified.",
+      "evidenceIds": [
+        "WF-STOCK-UNIVERSAL-HUD-BUFFS-2026-09-15"
+      ]
+    },
+    {
+      "id": "lua-negative-0018",
+      "domain": "LUA_API",
+      "hypothesis": "Every numeric HUD buff count is the number of native upgrade stacks",
+      "result": "FALSE",
+      "conclusion": "Preserve buffData/buffDataExtra and stock-confirmed HUD units. Do not derive upgrade stack count from percentages or generic numeric display data.",
+      "evidenceIds": [
+        "WF-STOCK-UNIVERSAL-HUD-BUFFS-2026-09-15"
+      ]
+    },
+    {
+      "id": "lua-negative-0019",
+      "domain": "LUA_API",
+      "hypothesis": "A successful GetBuffNotifications nil return means the getter failed",
+      "result": "FALSE",
+      "conclusion": "On the pinned executable nil is the empty-list result. Preserve GetterSucceeded, ReturnType and actual bounded GetterError separately; never relabel a thrown getter as an empty list.",
+      "evidenceIds": [
+        "WF-NATIVE-HUD-EMPTY-LIST-2026-09-15"
+      ]
+    },
+    {
+      "id": "lua-negative-0020",
+      "domain": "LUA_API",
+      "hypothesis": "InventoryControl is the stock receiver of HudRedux GetHudStatus",
+      "result": "FALSE",
+      "conclusion": "Stock follows mMovie.GetInstigator to GetHudStatus; the contextual HudMovieInstigator role is not a native class name. Never substitute the caster inventory.",
+      "evidenceIds": [
+        "WF-SHARED-BUFF-PIPELINE-REPAIR-2026-09-15"
+      ]
+    },
+    {
+      "id": "lua-negative-0021",
+      "domain": "LUA_API",
+      "hypothesis": "A fidelity rendering of an API-name hash as text proves literal string comparisons are correct in game",
+      "result": "FALSE",
+      "conclusion": "Audit constant tags at value uses. Name hashes and string literals sharing one upstream constant require separate emitted constants and remapped name/import uses.",
+      "evidenceIds": [
+        "WF-SHARED-BUFF-PIPELINE-REPAIR-2026-09-15"
+      ]
+    },
+    {
+      "id": "lua-negative-0022",
+      "domain": "LUA_API",
+      "hypothesis": "Startup diagnostics bindings remain active when addon activation uses an addon-only native contract",
+      "result": "FALSE",
+      "conclusion": "Both startup/F9 and natural target activation must use the shared union; dropping diagnostics requests removes installed native observers.",
+      "evidenceIds": [
+        "WF-SHARED-BUFF-PIPELINE-REPAIR-2026-09-15"
+      ]
     }
   ],
   "statistics": {
-    "symbols": 242,
-    "deepContracts": 47,
+    "symbols": 258,
+    "deepContracts": 64,
     "catalogSymbols": 225,
     "highConfidenceCatalogSymbols": 175,
     "corpusCallSites": 37615,
@@ -11221,7 +12021,7 @@
     "nativeFunctions": 2,
     "nativeTypes": 4,
     "explicitNativeLinks": 0,
-    "evidenceRecords": 24,
-    "negativeFindings": 16
+    "evidenceRecords": 41,
+    "negativeFindings": 29
   }
 }

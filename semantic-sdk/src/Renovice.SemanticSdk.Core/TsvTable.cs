@@ -45,7 +45,6 @@ internal sealed class TsvTable
 
     public bool HasColumn(string name) => _columns.ContainsKey(name);
 }
-
 internal sealed class TsvRow
 {
     private readonly string _path;

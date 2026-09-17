@@ -127,3 +127,32 @@ argument 1 as a callback-local reference whose underlying object is the
 damaged `AvatarOrEntity`; callers must not retain it after the callback. V52
 proved that this wrapper does not expose `IsDead`, so native object identity
 must not be confused with a complete ordinary Avatar Lua method table.
+
+## Runtime value and transaction rules from Ice Wave
+
+The 2026-09-14 Ice Wave investigation added five permanent authoring rules:
+
+1. `DamageData:GetBaseAmount()` returned an engine-owned `UpgradedValue`
+   wrapper whose numeric reading changed when the owning packet changed. It was
+   a live view at that callsite, not an immutable snapshot. Copy
+   `GetModifiedValue()` into a Lua number before mutation when restoration is
+   required.
+2. Repeated userdata equality or a repeated printed native address does not
+   prove logical transaction identity. The native allocator reused one address
+   for consecutive logical packets created inside the stock target loop.
+3. A target-local calculation must explicitly install its value for every
+   target, including the 1x case. Skipping the setter can retain another
+   target's modified packet value.
+4. Hook coverage is layer-specific. The exact native `DamageDD` hook ran while
+   the expected nested `luaCalls[7].before` callback did not. Select a hook from
+   observed execution, not from a matching prototype label alone.
+5. Ordinary Luau library contents are not guaranteed in DE's VM. The tested
+   target environment exposed `math.min` but not `math.huge`.
+
+These rules describe runtime behavior and addon authoring. They do not change
+the meaning of an opcode, DE-container roundtrip, compiler fixed point, or
+Semantic IR verification. A bytecode-perfect program can still contain an
+incorrect assumption about native userdata lifetime.
+
+The detailed hypothesis record is
+`RESEARCH/ICE_WAVE_RUNTIME_SEMANTICS_2026-09-14.md`.

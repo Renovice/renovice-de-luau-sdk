@@ -1,0 +1,28 @@
+{
+  "SelfTest": "PASS 8/8",
+  "Validation": "PASS",
+  "DeterministicSecondGeneration": "PASS",
+  "EvidenceRecords": 35,
+  "Symbols": 248,
+  "DeepContracts": 54,
+  "CoreCatalog": 225,
+  "HighConfidence": 175,
+  "NegativeFindings": 21,
+  "Outputs": [
+    {
+      "Path": "shared/semantic-sdk/semantic-sdk.json",
+      "Sha256": "B19AB9931DADDD1EB9953449AC92B0786D0FE47ACF6CACD4CEFD3821ADD5B11D",
+      "Length": 332164
+    },
+    {
+      "Path": "shared/semantic-sdk/symbols.tsv",
+      "Sha256": "D87CFE56FBEA8B305694EA4804F5013A541D8376DBB9ED29EBAF83223F7A729F",
+      "Length": 52450
+    },
+    {
+      "Path": "shared/semantic-sdk/manifest.json",
+      "Sha256": "6C594A28B2CEBE7E2218462154930ECB3AEECABDED81CBEFE887011E7C4C79EF",
+      "Length": 2124
+    }
+  ]
+}

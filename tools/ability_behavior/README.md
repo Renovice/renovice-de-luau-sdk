@@ -20,18 +20,16 @@ calls are transitively included. `lexical_signal_index` and
 `cleanup_pair_candidates` are search aids. Their names are not promoted into
 gameplay, authority, lifetime, mutation, or cleanup contracts.
 
-Run from this directory. The Ability Studio catalog is an external input and is
-not bundled in this compiler repository:
+Run from this directory:
 
 ```powershell
-.\build.ps1 -Catalog D:\private\ability-catalog.json -Jobs 2
+.\build.ps1 -Jobs 2
 ```
 
 Use `-Reuse` only to reuse a module render whose input bytecode, decompiler,
 Semantic SDK, artifact sizes, and artifact hashes all match its cache
 manifest. The default output is
-`work/ability-behavior/current/ability-behavior-catalog.json`. If `-Catalog` is
-omitted, the standalone convention is `knowledge/ability-catalog.json`.
+`work/ability-behavior/current/ability-behavior-catalog.json`.
 
 ## Current pinned result
 

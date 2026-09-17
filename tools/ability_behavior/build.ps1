@@ -12,12 +12,12 @@ $ErrorActionPreference = 'Stop'
 
 $toolDirectory = $PSScriptRoot
 $toolchain = [IO.Path]::GetFullPath((Join-Path $toolDirectory '..\..'))
-$workspace = $toolchain
+$workspace = [IO.Path]::GetFullPath((Join-Path $toolchain '..\..\..'))
 if ([string]::IsNullOrWhiteSpace($Catalog)) {
-    $Catalog = Join-Path $workspace 'knowledge\ability-catalog.json'
+    $Catalog = Join-Path $workspace 'work\catalogs\ability-catalog.json'
 }
 if ([string]::IsNullOrWhiteSpace($SemanticSdk)) {
-    $SemanticSdk = Join-Path $workspace 'knowledge\semantic-sdk\symbols.tsv'
+    $SemanticSdk = Join-Path $workspace 'shared\semantic-sdk\symbols.tsv'
 }
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
     $OutputDirectory = Join-Path $workspace 'work\ability-behavior\current'

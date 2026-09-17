@@ -2,6 +2,7 @@
 *.bat text eol=crlf
 *.cmd text eol=crlf
 *.ps1 text eol=crlf
+*.log text eol=lf -whitespace
 
 # Extracted strings and raw disassembly preserve source-significant whitespace.
 *.tsv text eol=lf -whitespace

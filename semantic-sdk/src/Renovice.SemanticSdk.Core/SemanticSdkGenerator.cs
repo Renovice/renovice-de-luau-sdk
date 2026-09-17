@@ -120,13 +120,10 @@ public static class SemanticSdkGenerator
     }
 
     public static string SerializeDocument(SemanticSdkDocument document) =>
-        NormalizeNewlines(JsonSerializer.Serialize(document, SemanticSdkJsonContext.Default.SemanticSdkDocument)) + "\n";
+        JsonSerializer.Serialize(document, SemanticSdkJsonContext.Default.SemanticSdkDocument) + "\n";
 
     public static string SerializeManifest(SdkManifest manifest) =>
-        NormalizeNewlines(JsonSerializer.Serialize(manifest, SemanticSdkJsonContext.Default.SdkManifest)) + "\n";
-
-    private static string NormalizeNewlines(string value) =>
-        value.Replace("\r\n", "\n", StringComparison.Ordinal).Replace('\r', '\n');
+        JsonSerializer.Serialize(manifest, SemanticSdkJsonContext.Default.SdkManifest) + "\n";
 
     public static string SerializeSymbols(IEnumerable<ApiSymbol> symbols)
     {

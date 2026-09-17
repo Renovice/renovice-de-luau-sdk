@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "assembled_utc": "2026-09-10T09:11:15Z",
+  "assembled_utc": "2026-09-17T08:47:59.6237446Z",
   "repository": "renovice-de-luau-sdk",
   "purpose": "Standalone DE Luau decompiler, recompiler, certification harness, and optional evidence-backed readable/API layer",
   "source_roles": {
@@ -35,16 +35,16 @@
       "census_rows": 55709,
       "core": 225,
       "high_confidence": 175,
-      "deep_contracts": 30
+      "deep_contracts": 33
     },
     "semantic_sdk": {
       "selftests": "8/8",
-      "symbols": 242,
-      "deep_contracts": 47,
+      "symbols": 258,
+      "deep_contracts": 64,
       "catalog_symbols": 225,
       "corpus_sites": 37615,
-      "evidence": 24,
-      "negative_findings": 16
+      "evidence": 41,
+      "negative_findings": 29
     },
     "ability_behavior_selftest": "6/6",
     "external_corpus": {
@@ -62,23 +62,23 @@
   "pinned_artifacts": [
     {
       "path": "api/warframe/contracts.tsv",
-      "bytes": 16777,
-      "sha256": "7B83A6EFC582C27BB92D7ADD48B16E528A5CAB255EBC8A57CFB211EEF0D68D51"
+      "bytes": 26163,
+      "sha256": "5C29AE87145A2C42C7AAD9AC4BC2212FB202C611DC301545495FC9295B5D18C2"
     },
     {
       "path": "api/warframe/evidence.tsv",
-      "bytes": 10138,
-      "sha256": "230BFF23F1188054BB9655BC109D9558E969A79F24ECB70705E5466F74B02F4A"
+      "bytes": 21418,
+      "sha256": "A285364DD2059DD993E17315DC05A3C6F32040B0596AEF8D06CE7D861C930846"
     },
     {
       "path": "api/warframe/negative_contracts.tsv",
-      "bytes": 2510,
-      "sha256": "001054608AC1B2838E057DA5008FC92378E8CDAEAFA33F67A3CD71985CB849BD"
+      "bytes": 6451,
+      "sha256": "A75F28460A3F157828B7447FF3DB628B581AA0CC4F7EB9EB60787B9F7F02247B"
     },
     {
       "path": "api/warframe/selected_catalog.tsv",
-      "bytes": 49622,
-      "sha256": "1A3CCF00EA6C147C85B0F73D51C9E06F7AD5DC421C1AF16329A06225AEBC55AF"
+      "bytes": 49599,
+      "sha256": "4B29EC9E8FCAAE1D9DC7C4C1429F5F77DB6C206CA89534EBD9E1625E92297C7F"
     },
     {
       "path": "api/warframe/selection_seeds.tsv",
@@ -87,8 +87,8 @@
     },
     {
       "path": "bin/derecomp.exe",
-      "bytes": 7067929,
-      "sha256": "60157E2FD66E884E089AA7762AA7C5CD79C67748A502B7885FF6FEAE5AB46D6C"
+      "bytes": 7069537,
+      "sha256": "6F4572FAA0BB5BB56469EA2B874C4226191C482279A9CD9FBA91A59A3BCB977D"
     },
     {
       "path": "bin/luau-compile.exe",
@@ -117,18 +117,18 @@
     },
     {
       "path": "data/name_map.json",
-      "bytes": 973979,
-      "sha256": "7F2A78F407201465B7FC069720FCA74C58C91F6BDEC995FA64798BF856CCFF3B"
+      "bytes": 1004255,
+      "sha256": "4E6B244D472D5BB79D9C538256A4DC859CEEB8321A311E5C3F2BE12F200867A5"
     },
     {
       "path": "data/namebase_merged.tsv",
-      "bytes": 22614188,
-      "sha256": "73F35EB41145CAE91875D83949AC457AC4A4F132DB2F7CDBC82E310D3D0CED0E"
+      "bytes": 23536464,
+      "sha256": "BCAE15048AAE6879DED94503B132E929661474A3FC6B5703F2A94E8584C2E22B"
     },
     {
       "path": "data/namebase_verified.tsv",
-      "bytes": 22614188,
-      "sha256": "73F35EB41145CAE91875D83949AC457AC4A4F132DB2F7CDBC82E310D3D0CED0E"
+      "bytes": 23536464,
+      "sha256": "BCAE15048AAE6879DED94503B132E929661474A3FC6B5703F2A94E8584C2E22B"
     },
     {
       "path": "docs/certificates/standalone-2026-09-10/idempotence.json",
@@ -157,18 +157,18 @@
     },
     {
       "path": "knowledge/semantic-sdk/manifest.json",
-      "bytes": 1911,
-      "sha256": "A4DA74D660E07EE0F06CAB998977B1CCD5A1DBD0C1F4CFD3CF31F75E162326DF"
+      "bytes": 1970,
+      "sha256": "0410F3B07F0C657408A08AFAAADE189DF8C4ACFC78B45C9AC83CE16015654426"
     },
     {
       "path": "knowledge/semantic-sdk/semantic-sdk.json",
-      "bytes": 301302,
-      "sha256": "91E5707177683ADA90CF264C72CAA0FF16BB342ED17ABE735B3E5C6A1DFC83D3"
+      "bytes": 352727,
+      "sha256": "358C94AD69A08DDB6D68357B077875955C05DDFC7F3D5AD31622D81DF1D4219D"
     },
     {
       "path": "knowledge/semantic-sdk/symbols.tsv",
-      "bytes": 50925,
-      "sha256": "B0F89189BA5AC4CEBE5A189BB300C292DF53B8652F56DE8973723F4F8E25D87E"
+      "bytes": 54736,
+      "sha256": "860EFFE01A51342A8A4529A2127D0EBEAB71153851A4304454FE17D7B592719E"
     },
     {
       "path": "semantic-sdk/registry/native_links.tsv",

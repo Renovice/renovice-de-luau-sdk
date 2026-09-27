@@ -41,6 +41,10 @@ Before committing an intentional release change, stage it and run `python .\tool
 
 These claims are separate. A fixed point does not mean that rebuilt bytes equal the original stock bytes, and neither claim proves live behavior.
 
+## U44 compatibility
+
+The 2026-09-27 update adds an explicit U44 build profile and reversible opcode/name lowering. See [profiles/u44/README.md](profiles/u44/README.md) for commands and limitations. Existing default commands retain the U43 contract; normalize U44 bytecode before using those decompiler modes. This profile does not automatically rebind changed stock modules, prototypes or callsites.
+
 ## Current evidence boundary
 
 The portable repository was synchronized with the active translator, API

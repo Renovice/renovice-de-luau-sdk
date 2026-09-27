@@ -15,6 +15,7 @@
 #include "luau_bc.h"
 #include "de_container.h"
 #include "de_namehash.h"
+#include "de_build_profile.h"
 #include "transcode.h"
 #include "ir.h"
 #include "expr.h"
@@ -259,7 +260,10 @@ static int cmd_recompile(int argc, char** argv) {
     std::string bc = compile_luau(argv[2], err);
     if (bc.empty()) { std::fprintf(stderr, "[derecomp] luau compile failed: %s\n", err.c_str()); return 1; }
     std::string de_body;
-    try { de_body = tc::transcode(bc, hashed_globals, hashed_fields); }
+    try {
+        de_body = tc::transcode(bc, hashed_globals, hashed_fields);
+        if (de::active_namehash_seed == 0x768e5ed0u) de_body = de::change_build_profile(de_body, true);
+    }
     catch (const std::exception& e) { std::fprintf(stderr, "[derecomp] transcode error: %s\n", e.what()); return 1; }
     // sanity: the emitted body must re-parse as a valid DE container (offline load check)
     bool loads = true; int nps = -1;
@@ -2759,6 +2763,45 @@ static void install_certified_decompiler_defaults() {
 int main(int argc, char** argv) {
     install_certified_decompiler_defaults();
     std::string mode = (argc >= 2) ? argv[1] : "";
+    if (mode == "recompile-u44" && argc >= 4) {
+        if (argc >= 5) {
+            std::ifstream map(long_path(argv[4]));
+            if (!map) { std::fprintf(stderr, "profile: cannot read source alias map\n"); return 1; }
+            std::uint32_t old_hash, new_hash;
+            while (map >> std::hex >> old_hash >> new_hash) {
+                const auto existing = de::source_aliases.find(old_hash);
+                if (existing != de::source_aliases.end() && existing->second != new_hash) {
+                    std::fprintf(stderr, "profile: ambiguous source alias\n"); return 1;
+                }
+                de::source_aliases[old_hash] = new_hash;
+            }
+            if (!map.eof()) { std::fprintf(stderr, "profile: invalid source alias map\n"); return 1; }
+        }
+        de::active_namehash_seed = 0x768e5ed0u;
+        return cmd_recompile(argc, argv);
+    }
+    if ((mode == "profile-to-u44" || mode == "profile-from-u44") && argc == 5) {
+        try {
+            std::ifstream stream(long_path(argv[4]));
+            if (!stream) throw std::runtime_error("profile: cannot read native-name map");
+            std::map<std::uint32_t, std::uint32_t> names;
+            std::string line;
+            while (std::getline(stream, line)) {
+                if (line.empty() || line[0] == '#') continue;
+                std::istringstream row(line);
+                std::uint32_t a = 0, b = 0;
+                if (!(row >> std::hex >> a >> b)) throw std::runtime_error("profile: invalid name map row");
+                if (mode == "profile-from-u44") std::swap(a, b);
+                const auto previous = names.find(a);
+                if (previous != names.end() && previous->second != b) throw std::runtime_error("profile: ambiguous native-name map");
+                names[a] = b;
+            }
+            const auto result = de::change_build_profile(read_file(argv[2]), mode == "profile-to-u44", &names);
+            if (!write_file(argv[3], result)) throw std::runtime_error("profile: cannot write output");
+            std::printf("PROFILE PASS %s bytes=%zu\n", mode.c_str(), result.size());
+            return 0;
+        } catch (const std::exception& e) { std::fprintf(stderr, "%s\n", e.what()); return 1; }
+    }
     if (mode == "transcode-global-selftest") return cmd_transcode_global_selftest();
     if (mode == "closure-index-selftest") return cmd_closure_index_selftest();
     if (mode == "closure-map" && argc >= 4) return cmd_closure_map(argc, argv);

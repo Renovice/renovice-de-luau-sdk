@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "assembled_utc": "2026-09-17T08:47:59.6237446Z",
+  "assembled_utc": "2026-09-27T04:08:15.7665096Z",
   "repository": "renovice-de-luau-sdk",
   "purpose": "Standalone DE Luau decompiler, recompiler, certification harness, and optional evidence-backed readable/API layer",
   "source_roles": {
@@ -87,8 +87,8 @@
     },
     {
       "path": "bin/derecomp.exe",
-      "bytes": 7069537,
-      "sha256": "6F4572FAA0BB5BB56469EA2B874C4226191C482279A9CD9FBA91A59A3BCB977D"
+      "bytes": 7077035,
+      "sha256": "09B2BF39B4692F94E95EB9410319BC8FD6095D4315E94B880DEBA4D60A8F9D60"
     },
     {
       "path": "bin/luau-compile.exe",
